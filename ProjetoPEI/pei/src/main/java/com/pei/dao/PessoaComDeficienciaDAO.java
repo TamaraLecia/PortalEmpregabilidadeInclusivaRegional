@@ -61,10 +61,5 @@ public class PessoaComDeficienciaDAO {
         return null; // Retorna null se as credenciais estiverem erradas
     }
 
-    // Método para logout
-    // Aqui apenas retornamos true para indicar que o logout foi processado no backend
-    public boolean logout() {
-        // Qualquer lógica adicional de logout pode ser colocada aqui
-        return true; // Representa que o logout foi bem-sucedido
-    }
+   
 }
