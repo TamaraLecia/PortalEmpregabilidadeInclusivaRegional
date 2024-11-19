@@ -43,7 +43,7 @@ public class PessoaComDeficienciaDAO {
             stmt.setString(2, senha);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    PessoaComDeficiencia pessoa = new PessoaComDeficiencia();
+                    PessoaComDeficiencia pessoa = new PessoaComDeficiencia(0, sql, null, sql, sql, sql, sql, sql, sql, sql, sql);
                     pessoa.setNome(rs.getString("nome"));
                     pessoa.setDataNascimento(rs.getDate("data_nascimento"));
                     pessoa.setCpf(rs.getString("cpf"));

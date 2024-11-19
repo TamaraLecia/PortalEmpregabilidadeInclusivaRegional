@@ -1,0 +1,66 @@
+package com.pei.controller;
+
+import java.sql.Connection;
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.pei.dao.AdministradorDAO;
+import com.pei.models.Administrador;
+import com.pei.models.PessoaComDeficiencia;
+import com.pei.models.Vaga;
+
+@RestController
+@RequestMapping("/administrador")
+public class AdministradorController {
+    private final AdministradorDAO administradorDAO;
+
+    public AdministradorController(Connection connection) {
+        this.administradorDAO = new AdministradorDAO(connection);
+    }
+
+    // Endpoint para publicar uma vaga
+    @PostMapping("/vagas")
+    public ResponseEntity<Object> publicarVaga(@RequestBody Vaga vaga) {
+        try {
+            int idVaga = administradorDAO.publicarVaga(vaga);
+            if (idVaga > 0) {
+                return ResponseEntity.status(HttpStatus.CREATED).body("Vaga publicada com sucesso! ID: " + idVaga);
+            } else {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao publicar a vaga.");
+            }
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro: " + e.getMessage());
+        }
+    }
+
+
+    // Endpoint para visualizar candidatos por vaga
+    @GetMapping("/vagas/{idVaga}/candidatos")
+    public ResponseEntity<List<PessoaComDeficiencia>> visualizarCandidatosPorVaga(@PathVariable int idVaga) {
+        List<PessoaComDeficiencia> candidatos = administradorDAO.visualizarCandidatosPorVaga(idVaga);
+        if (candidatos.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(candidatos);
+        }
+        return ResponseEntity.ok(candidatos);
+    }
+
+    // Endpoint para realizar login
+    @PostMapping("/login")
+    public ResponseEntity<Administrador> login(@RequestParam String email, @RequestParam String senha) {
+        Administrador admin = administradorDAO.login(email, senha);
+        if (admin == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
+        return ResponseEntity.ok(admin);
+    }
+}
+
