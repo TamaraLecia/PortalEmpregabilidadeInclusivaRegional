@@ -94,8 +94,6 @@ public class PessoaComDeficienciaController {
                     System.out.println("Beneficios: " + vaga.getBeneficios());
                     System.out.println("Salário: " + vaga.getSalario());
                     System.out.println();
-                    System.out.println();
-                    System.out.println();
 
                 }
             }
