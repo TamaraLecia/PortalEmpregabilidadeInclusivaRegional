@@ -101,4 +101,10 @@ public class PessoaComDeficienciaController {
             System.out.println("Vaga não encontrada");
         }
     }
+
+    //Endpoint para remover Formação
+    @PostMapping("/removerFormacao")
+    public void removerFormacao(@RequestParam Integer id){
+        pessoaComDeficienciaDAO.removerFormacao(id);
+    }
 }

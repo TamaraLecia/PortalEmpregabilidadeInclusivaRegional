@@ -116,5 +116,46 @@ public class PessoaComDeficienciaDAO {
         return bucarVaga(titulo, localizacao);
     }
 
+    //Metodo para remover experiencia
+    public void removerFormacao(Integer id){
+        String sql = "DELETE formacao FROM pessoa_com_deficiencia WHERE id = ?";
+        List<PessoaComDeficiencia> pessoaComDeficiencias = new ArrayList<PessoaComDeficiencia>();
+
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rset = null;
+
+        try {
+            con = DataBaseConfiguracao.conectar();
+
+            pstm = (PreparedStatement) con.prepareStatement(sql);
+            rset = pstm.executeQuery();
+
+            while(rset.next()){
+                PessoaComDeficiencia pessoasComDeficiencia = new PessoaComDeficiencia(0, sql, null, sql, sql, sql, sql, sql, sql, sql, sql);
+                pessoasComDeficiencia.setFormacao(rset.getString("formacao"));
+
+                pessoaComDeficiencias.remove(pessoasComDeficiencia);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            try {
+                if(rset != null){
+                    rset.close();
+                }
+                if(pstm != null){
+                    pstm.close();
+                }
+                if(con != null ){
+                    con.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
    
 }
