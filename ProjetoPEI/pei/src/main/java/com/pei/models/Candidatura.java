@@ -8,4 +8,12 @@ public class Candidatura {
     private String nome;
     private int idVaga;
     private String titulo;
+    private boolean status;
+
+    public boolean getStatus() {
+        return true;
+    }
+    public void setStatus(boolean status){
+        this.status = status;
+    }
 }

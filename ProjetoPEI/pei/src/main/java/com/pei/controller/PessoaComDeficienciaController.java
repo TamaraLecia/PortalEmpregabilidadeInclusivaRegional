@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pei.dao.PessoaComDeficienciaDAO;
 import com.pei.models.PessoaComDeficiencia;
 import com.pei.models.Vaga;
+import com.pei.service.CandidaturaService;
 
 @RestController
 @RequestMapping("/pessoas-com-deficiencia")
@@ -61,7 +62,7 @@ public class PessoaComDeficienciaController {
         }
     }
 
-        //Endpoint para realizar o logout
+    //Endpoint para realizar o logout
     @WebServlet(name = "Logout", urlPatterns = {"/Logout"})
     public class Logout extends HttpServlet {
         public void  realizarLougout(HttpServletRequest requisicao, HttpServletResponse resposta) {
@@ -95,12 +96,35 @@ public class PessoaComDeficienciaController {
                     System.out.println("Salário: " + vaga.getSalario());
                     System.out.println();
                     System.out.println();
-                    System.out.println();
+                    break;
 
                 }
+            }else{
+                System.out.println("Vaga não encontrada");
             }
         } catch (Exception e) {
-            System.out.println("Vaga não encontrada");
+            e.printStackTrace();
         }
     }
+
+    //Endpoint para remover Formação
+    @PostMapping("/removerFormacao")
+    public void removerFormacao(@RequestParam Integer id){
+        pessoaComDeficienciaDAO.removerFormacao(id);
+    }
+
+    //Endpoint para remover Experiência
+   @PostMapping("/removerExperiência")
+   public void removerExperiencia(@RequestParam Integer id){
+       pessoaComDeficienciaDAO.removerExperiencia(id);
+       System.out.println("Experiencia removida");
+   }
+
+   //Endpoint para cancelar candidatura
+   @PostMapping("/cancelarCandidatura")
+   public void cancelarCandidatura(@RequestParam boolean status){
+        CandidaturaService candidaturaService = new CandidaturaService();
+
+        candidaturaService.cancelarCandidatura(status);
+   }
 }
