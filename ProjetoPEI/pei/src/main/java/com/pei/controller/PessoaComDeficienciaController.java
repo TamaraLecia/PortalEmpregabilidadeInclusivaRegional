@@ -62,7 +62,7 @@ public class PessoaComDeficienciaController {
         }
     }
 
-        //Endpoint para realizar o logout
+    //Endpoint para realizar o logout
     @WebServlet(name = "Logout", urlPatterns = {"/Logout"})
     public class Logout extends HttpServlet {
         public void  realizarLougout(HttpServletRequest requisicao, HttpServletResponse resposta) {
@@ -95,6 +95,8 @@ public class PessoaComDeficienciaController {
                     System.out.println("Beneficios: " + vaga.getBeneficios());
                     System.out.println("Salário: " + vaga.getSalario());
                     System.out.println();
+                    System.out.println();
+                    break;
 
                 }
             }else{
