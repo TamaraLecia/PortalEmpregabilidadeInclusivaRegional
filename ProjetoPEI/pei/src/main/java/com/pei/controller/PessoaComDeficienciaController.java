@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pei.dao.PessoaComDeficienciaDAO;
 import com.pei.models.PessoaComDeficiencia;
 import com.pei.models.Vaga;
+import com.pei.service.CandidaturaService;
 
 @RestController
 @RequestMapping("/pessoas-com-deficiencia")
@@ -96,9 +97,11 @@ public class PessoaComDeficienciaController {
                     System.out.println();
 
                 }
+            }else{
+                System.out.println("Vaga não encontrada");
             }
         } catch (Exception e) {
-            System.out.println("Vaga não encontrada");
+            e.printStackTrace();
         }
     }
 
@@ -107,4 +110,19 @@ public class PessoaComDeficienciaController {
     public void removerFormacao(@RequestParam Integer id){
         pessoaComDeficienciaDAO.removerFormacao(id);
     }
+
+    //Endpoint para remover Experiência
+   @PostMapping("/removerExperiência")
+   public void removerExperiencia(@RequestParam Integer id){
+       pessoaComDeficienciaDAO.removerExperiencia(id);
+       System.out.println("Experiencia removida");
+   }
+
+   //Endpoint para cancelar candidatura
+   @PostMapping("/cancelarCandidatura")
+   public void cancelarCandidatura(@RequestParam boolean status){
+        CandidaturaService candidaturaService = new CandidaturaService();
+
+        candidaturaService.cancelarCandidatura(status);
+   }
 }

@@ -8,5 +8,5 @@ import com.pei.models.Candidatura;
 
 public interface CandidaturaRepository extends JpaRepository<Candidatura, Integer> {
 
-    Optional<Candidatura> findById(Integer id);
+    Optional<Candidatura> findByStatus(boolean status);
 }

@@ -12,16 +12,14 @@ public class CandidaturaService {
     @Autowired
     private CandidaturaRepository candidaturaRepository;
 
-    public String cancelarCandidatura(Integer id){
-        Candidatura candidatura = candidaturaRepository.findById(id)
+    public void cancelarCandidatura(boolean status){
+        Candidatura candidatura = candidaturaRepository.findByStatus(status)
         .orElseThrow(null);
 
         if(candidatura.getStatus() == false){
             candidatura.setStatus(true);
-            
-            return "Candidatura cancelada";
+            System.out.println("Candidatura cancelada");
         }
-        return null;
     }
 
 }
