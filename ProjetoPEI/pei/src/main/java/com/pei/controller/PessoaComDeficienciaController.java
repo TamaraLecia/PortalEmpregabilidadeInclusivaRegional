@@ -107,6 +107,7 @@ public class PessoaComDeficienciaController {
                 redireciona.forward(requisicao, resposta);
             } catch (Exception e) {
                 System.out.println(e);
+                System.out.println();
             }
         }
 
