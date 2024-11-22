@@ -10,7 +10,6 @@ import lombok.EqualsAndHashCode;
 public class PessoaComDeficiencia extends Pessoa{
 	public PessoaComDeficiencia(int int1, String string, Date date, String string2, String string3, String string4,
 			String string5, String string6, String string7, String string8, String string9) {
-		//TODO Auto-generated constructor stub
 	}
 	private String genero;
 	private String deficiencia;
@@ -22,5 +21,4 @@ public class PessoaComDeficiencia extends Pessoa{
 	private String interesse;
 	private String cpf;
     private String endereco;
- 
 }
