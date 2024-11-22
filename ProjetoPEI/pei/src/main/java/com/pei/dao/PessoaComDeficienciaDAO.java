@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.pei.models.PessoaComDeficiencia;
+import com.pei.models.Pessoa;
 import com.pei.models.Vaga;
 
 public class PessoaComDeficienciaDAO {
@@ -16,23 +17,37 @@ public class PessoaComDeficienciaDAO {
     public PessoaComDeficienciaDAO(Connection connection) {
         this.connection = connection;
     }
+    // Método para cadastro primario
+    public boolean cadastroPrimario(Pessoa pessoa) throws SQLException{
+        String sql = "INSERT INTO pessoa(nome, telefone, email, senha)" + "VALUES(?, ?, ?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, pessoa.getNome());            
+            stmt.setString(2, pessoa.getTelefone());
+            stmt.setString(3, pessoa.getEmail());
+            stmt.setString(4, pessoa.getSenha());
+            return stmt.executeUpdate() > 0;
+        }
+    }
 
     // Método para cadastrar uma nova pessoa com deficiência
     public boolean cadastrar(PessoaComDeficiencia pessoa) throws SQLException {
-        String sql = "INSERT INTO pessoa_com_deficiencia (nome, data_nascimento, cpf, endereco, telefone, email, senha, deficiencia, formacao, experiencia) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO pessoa_com_deficiencia (interesse, genero, dataNascimento, nacionalidade, endereco, formacao, deficiencia, cpf, descricao, nome, telefone, email, senha) " +
+                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, pessoa.getNome());
-            stmt.setDate(2, new java.sql.Date(pessoa.getDataNascimento().getTime()));
-            stmt.setString(3, pessoa.getCpf());
-            stmt.setString(4, pessoa.getEndereco());
-            stmt.setString(5, pessoa.getTelefone());
-            stmt.setString(6, pessoa.getEmail());
-            stmt.setString(7, pessoa.getSenha());
-            stmt.setString(8, pessoa.getDeficiencia());
-            stmt.setString(9, pessoa.getFormacao());
-            stmt.setString(10, pessoa.getExperiencia());
+            stmt.setString(1, pessoa.getInteresse()); 
+            stmt.setString(2, pessoa.getGenero());             
+            stmt.setDate(3, new java.sql.Date(pessoa.getDataNascimento().getTime()));
+            stmt.setString(4, pessoa.getNacionalidade());
+            stmt.setString(5, pessoa.getFormacao());
+            stmt.setString(6, pessoa.getEndereco());
+            stmt.setString(7, pessoa.getDeficiencia());
+            stmt.setString(8, pessoa.getCpf());
+            stmt.setString(9, pessoa.getDescricao());
+            stmt.setString(10, pessoa.getNome());            
+            stmt.setString(11, pessoa.getTelefone());
+            stmt.setString(12, pessoa.getEmail());
+            stmt.setString(13, pessoa.getSenha());
             return stmt.executeUpdate() > 0;
         }
     }

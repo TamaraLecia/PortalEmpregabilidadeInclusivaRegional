@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pei.dao.PessoaComDeficienciaDAO;
+import com.pei.models.Pessoa;
 import com.pei.models.PessoaComDeficiencia;
 import com.pei.models.Vaga;
 import com.pei.service.CandidaturaService;
@@ -37,6 +38,17 @@ public class PessoaComDeficienciaController {
     public PessoaComDeficienciaController(Connection connection) {
         this.pessoaComDeficienciaDAO = new PessoaComDeficienciaDAO(connection);
     }
+    // Endpoint para o cadastro primario
+    @PostMapping("/CadastroPrimario")
+    public String cadastroPrimario(@RequestBody Pessoa pessoa) {
+        try {
+            boolean cadastrado = pessoaComDeficienciaDAO.cadastroPrimario(pessoa);
+            return cadastrado ? "Cadastro realizado com sucesso!" : "Erro ao realizar cadastro.";
+        } catch (SQLException e) {
+            return "Erro: " + e.getMessage();
+        }
+    }
+    
 
     // Endpoint para cadastrar uma nova pessoa com deficiência
     @PostMapping("/cadastrar")
@@ -55,9 +67,8 @@ public class PessoaComDeficienciaController {
         try {
             PessoaComDeficiencia pessoa = pessoaComDeficienciaDAO.login(email, senha);
             if (pessoa != null) {
-                // Salva o usuário na sessão
                 session.setAttribute("usuarioLogado", pessoa);
-                return pessoa; // Retorna os dados da pessoa logada
+                return pessoa;
             } else {
                 return "Credenciais inválidas!";
             }

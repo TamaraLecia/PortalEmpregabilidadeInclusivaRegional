@@ -1,0 +1,17 @@
+package com.pei.models;
+
+import java.util.Date;
+import java.util.List;
+
+import lombok.Data;
+
+@Data
+public class Capacitacao {
+    Integer idCapacitacao;
+    String tituloCapacitacao;
+    String descriçãoCapacitação;
+    Date dataInicioCapacitacao;
+    Date dataFimCapacitacao;
+    String instrutorCapacitaca;
+    String publicoAlvos;
+}

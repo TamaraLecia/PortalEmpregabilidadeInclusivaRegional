@@ -1,6 +1,7 @@
 package com.pei.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.pei.models.Administrador;
+import com.pei.models.Capacitacao;
 import com.pei.models.PessoaComDeficiencia;
 import com.pei.models.Vaga;
 
@@ -115,5 +117,27 @@ public class AdministradorDAO {
         }
 
         return administrador;
+    }
+
+    //Método para atualizar os dados da capacitação
+    public void alterarCapacitacao(Capacitacao capacitacao){
+        try {
+            Connection con = DataBaseConfiguracao.conectar();
+            PreparedStatement pstm = con.prepareStatement("UPDATE capacitaco SET titulo = ?, descricaoo = ?, dataInicio = ?, dataFim = ?, instrutor = ?, publicoAlvo = ? WHERE id = ? ");
+            
+            pstm.setString(1, capacitacao.getTituloCapacitacao());
+            pstm.setString(2, capacitacao.getDescriçãoCapacitação());
+            pstm.setDate(3, new Date(capacitacao.getDataInicioCapacitacao().getTime()));
+            pstm.setDate(4, new Date(capacitacao.getDataFimCapacitacao().getTime()));
+            pstm.setString(5, capacitacao.getInstrutorCapacitaca());
+            pstm.setString(5, capacitacao.getPublicoAlvos());
+            pstm.setInt(7,capacitacao.getIdCapacitacao());
+
+            pstm.executeUpdate();
+
+            
+        } catch (Exception e) {
+            System.out.println("Erro ao alterar informação " + e);
+        }
     }
 }
