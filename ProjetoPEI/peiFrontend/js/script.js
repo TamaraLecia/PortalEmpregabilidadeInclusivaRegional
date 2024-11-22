@@ -1,4 +1,4 @@
- const inputArea = document.getElementById('area').value;
+const inputArea = document.getElementById('area').value;
 const inputGenero = document.getElementById('genero').value;
 const inputNascimento = document.getElementById('nascimento').value;
 const inputNacionalidade = document.getElementById('nacionalidade').value;
@@ -21,7 +21,7 @@ const usuario = {
 
 };
 
-function cadastrar(cadastrar){
+function Cadastrar(){
     fetch('jdbc:mysql://localhost:3306/pei_database/pessoas-com-deficiencia/cadastrar',{
         method : 'POST',
         headers : {
