@@ -113,7 +113,7 @@ public class AdministradorController {
                 capacitacao.setDataInicioCapacitacao(new Date(capacitacao.getDataInicioCapacitacao().getTime()));
                 capacitacao.setDataFimCapacitacao(new Date(capacitacao.getDataFimCapacitacao().getTime()));
                 capacitacao.setInstrutorCapacitaca(instrutor);
-                capacitacao.setPublicoAlvos(publicoAlvo)
+                capacitacao.setPublicoAlvos(publicoAlvo);
 
                 AdministradorDAO administradorDAO = new AdministradorDAO(null);
                 administradorDAO.alterarCapacitacao(capacitacao);

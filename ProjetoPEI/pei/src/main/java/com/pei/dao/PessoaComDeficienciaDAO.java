@@ -1,6 +1,7 @@
 package com.pei.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -246,7 +247,30 @@ public class PessoaComDeficienciaDAO {
         }
     }
 
-    //Metódo para cancelar candidatura
+       //Método para atualizar os dados da Pessoa Com Deficiencia
+       public void alterarPessoaComDeficiencia(PessoaComDeficiencia pessoaComDeficiencia){
+        try {
+            Connection con = DataBaseConfiguracao.conectar();
+            PreparedStatement pstm = con.prepareStatement("UPDATE pessoa_com_deficiencia SET mome = ?, dataNascimento = ?, cpf = ?, genero = ?, endereco = ?, nacionalidade = ?, deficiencia = ?, areaInteresse = ?, formacao = ?, descricao = ? WHERE id = ? ");
+            
+            pstm.setString(1,pessoaComDeficiencia.getNome());
+            pstm.setDate(2, new Date(pessoaComDeficiencia.getDataNascimento().getTime()));
+            pstm.setString(3, pessoaComDeficiencia.getCpf());
+            pstm.setString(4, pessoaComDeficiencia.getGenero());
+            pstm.setString(5, pessoaComDeficiencia.getNacionalidade());
+            pstm.setString(6, pessoaComDeficiencia.getDeficiencia());
+            pstm.setString(7, pessoaComDeficiencia.getInteresse());
+            pstm.setString(8, pessoaComDeficiencia.getFormacao());
+            pstm.setString(9, pessoaComDeficiencia.getDescricao());
+            pstm.setInt(10, pessoaComDeficiencia.getId());
+
+            pstm.executeUpdate();
+
+            
+        } catch (Exception e) {
+            System.out.println("Erro ao alterar informação " + e);
+        }
+    }
     
 
    
