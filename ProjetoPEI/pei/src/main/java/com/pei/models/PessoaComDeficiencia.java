@@ -18,6 +18,9 @@ public class PessoaComDeficiencia extends Pessoa{
 	private String experiencia;
 	private String descricao;
 	private String nacionalidade;
+	private Date dataNascimento;
 	private String interesse;
+	private String cpf;
+    private String endereco;
  
 }

@@ -32,7 +32,7 @@ public class PessoaComDeficienciaDAO {
 
     // Método para cadastrar uma nova pessoa com deficiência
     public boolean cadastrar(PessoaComDeficiencia pessoa) throws SQLException {
-        String sql = "INSERT INTO pessoa_com_deficiencia (interesse, genero, data_nascimento, nacionalidade, endereco, formacao, deficiencia, cpf, nome, telefone, email, senha) " +
+        String sql = "INSERT INTO pessoa_com_deficiencia (interesse, genero, dataNascimento, nacionalidade, endereco, formacao, deficiencia, cpf, nome, telefone, email, senha) " +
                      "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
