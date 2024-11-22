@@ -64,7 +64,39 @@ public class PessoaComDeficienciaDAO {
         return null; // Retorna null se as credenciais estiverem erradas
     }
 
-        //Metodo para buscar vaga
+    //Método para visualizar perfil
+    public PessoaComDeficiencia visualizarPerfil(int idPessoa) {
+        String sql = "SELECT * FROM pessoa_com_deficiencia WHERE id = ?";
+        PessoaComDeficiencia pessoa = null;
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, idPessoa);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    pessoa = new PessoaComDeficiencia(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getDate("dataNascimento"),
+                        rs.getString("cpf"),
+                        rs.getString("endereco"),
+                        rs.getString("telefone"),
+                        rs.getString("email"),
+                        rs.getString("senha"),
+                        rs.getString("deficiencia"),
+                        rs.getString("formacao"),
+                        rs.getString("experiencia")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Erro ao buscar perfil: " + e.getMessage());
+        }
+
+        return pessoa; 
+    }
+
+    //Metodo para buscar vaga
     public List<Vaga> bucarVaga(String titulo, String localizacao){
         String sql = "SELECT * FROM pessoa_com_deficiencia WHERE titulo = ? || localizacao = ? ";
         List<Vaga> vagas = new ArrayList<Vaga>();

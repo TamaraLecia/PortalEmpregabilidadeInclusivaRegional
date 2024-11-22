@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,6 +63,17 @@ public class PessoaComDeficienciaController {
             }
         } catch (SQLException e) {
             return "Erro: " + e.getMessage();
+        }
+    }
+
+    // Endpoint para visualizar perfil
+    @GetMapping("/{id}")
+    public ResponseEntity<PessoaComDeficiencia> visualizarPerfil(@PathVariable int id) {
+        PessoaComDeficiencia pessoa = pessoaComDeficienciaDAO.visualizarPerfil(id);
+        if (pessoa != null) {
+            return ResponseEntity.ok(pessoa);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
 
