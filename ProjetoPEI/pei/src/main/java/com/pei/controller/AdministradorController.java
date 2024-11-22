@@ -1,7 +1,18 @@
 package com.pei.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.List;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pei.dao.AdministradorDAO;
 import com.pei.models.Administrador;
+import com.pei.models.Capacitacao;
 import com.pei.models.PessoaComDeficiencia;
 import com.pei.models.Vaga;
 
@@ -61,6 +73,53 @@ public class AdministradorController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
         return ResponseEntity.ok(admin);
+    }
+
+        //Endpoint para realizar o logout
+    @WebServlet(name = "Logout", urlPatterns = {"/Logout"})
+    public class Logout extends HttpServlet {
+        public void  realizarLougout(HttpServletRequest requisicao, HttpServletResponse resposta) {
+            try {
+                HttpSession sessao = requisicao.getSession(); //pegando referencia da sessão para realizar logout
+                sessao.invalidate(); //apagando a sessão do usuario
+
+                //Leva o usuario para a pagina inicial
+                RequestDispatcher redireciona = requisicao.getRequestDispatcher("index.html");
+                redireciona.forward(requisicao, resposta);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+
+    }
+
+    //Endpoint para atualizar dados da capacitação
+    @WebServlet(name = "alterar", urlPatterns = {"/alterar"})
+    public class alterarCapacitacao extends HttpServlet {
+        protected void alterar(HttpServletRequest requisicao, HttpServletResponse resposta) throws ServletException, IOException{
+            resposta.setContentType("text/html;charset=UTF8-8");
+            try(PrintWriter out = resposta.getWriter()){
+
+                String titulo = requisicao.getParameter("textTitulo");
+                String descricao = requisicao.getParameter("txtDescricao");
+                String dataInicio = requisicao.getParameter("txtDtaInicio");
+                String dataFim = requisicao.getParameter("dataFim");
+                String instrutor = requisicao.getParameter("textInstrutor");
+                String publicoAlvo = requisicao.getParameter("textPublicoAlvo");
+
+                Capacitacao capacitacao = new Capacitacao();
+                capacitacao.setTituloCapacitacao(titulo);
+                capacitacao.setDescriçãoCapacitação(descricao);
+                capacitacao.setDataInicioCapacitacao(new Date(capacitacao.getDataInicioCapacitacao().getTime()));
+                capacitacao.setDataFimCapacitacao(new Date(capacitacao.getDataFimCapacitacao().getTime()));
+                capacitacao.setInstrutorCapacitaca(instrutor);
+                capacitacao.setPublicoAlvos(publicoAlvo)
+
+                AdministradorDAO administradorDAO = new AdministradorDAO(null);
+                administradorDAO.alterarCapacitacao(capacitacao);
+            }
+        }
+        
     }
 }
 
