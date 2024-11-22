@@ -58,7 +58,7 @@ function longar(){
 
 /*
 function CadastrarUsuario(){
-    fetch("http://localhost:8080/pessoas-com-deficiencia/cadastrar",
+    fetch("http://localhost/phpmyadmin/index.php?route=/database/structure&db=pei_database/cadastrar",
         {
             headers: {
                 "Accept": "application/json",

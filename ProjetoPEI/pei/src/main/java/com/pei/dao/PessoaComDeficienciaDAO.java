@@ -1,6 +1,7 @@
 package com.pei.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,19 +36,19 @@ public class PessoaComDeficienciaDAO {
                      "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, pessoa.getInteresse()); 
-            stmt.setString(2, pessoa.getGenero());             
-            stmt.setDate(3, new java.sql.Date(pessoa.getDataNascimento().getTime()));
-            stmt.setString(4, pessoa.getNacionalidade());
-            stmt.setString(5, pessoa.getFormacao());
-            stmt.setString(6, pessoa.getEndereco());
-            stmt.setString(7, pessoa.getDeficiencia());
-            stmt.setString(8, pessoa.getCpf());
-            stmt.setString(9, pessoa.getDescricao());
-            stmt.setString(10, pessoa.getNome());            
-            stmt.setString(11, pessoa.getTelefone());
-            stmt.setString(12, pessoa.getEmail());
-            stmt.setString(13, pessoa.getSenha());
+            stmt.setString(2, pessoa.getInteresse()); 
+            stmt.setString(3, pessoa.getGenero());             
+            stmt.setDate(4, new java.sql.Date(pessoa.getDataNascimento().getTime()));
+            stmt.setString(5, pessoa.getNacionalidade());
+            stmt.setString(6, pessoa.getFormacao());
+            stmt.setString(7, pessoa.getEndereco());
+            stmt.setString(8, pessoa.getDeficiencia());
+            stmt.setString(9, pessoa.getCpf());
+            stmt.setString(10, pessoa.getDescricao());
+            stmt.setString(11, pessoa.getNome());            
+            stmt.setString(12, pessoa.getTelefone());
+            stmt.setString(13, pessoa.getEmail());
+            stmt.setString(14, pessoa.getSenha());
             return stmt.executeUpdate() > 0;
         }
     }
@@ -246,7 +247,30 @@ public class PessoaComDeficienciaDAO {
         }
     }
 
-    //Metódo para cancelar candidatura
+       //Método para atualizar os dados da Pessoa Com Deficiencia
+       public void alterarPessoaComDeficiencia(PessoaComDeficiencia pessoaComDeficiencia){
+        try {
+            Connection con = DataBaseConfiguracao.conectar();
+            PreparedStatement pstm = con.prepareStatement("UPDATE pessoa_com_deficiencia SET mome = ?, dataNascimento = ?, cpf = ?, genero = ?, endereco = ?, nacionalidade = ?, deficiencia = ?, areaInteresse = ?, formacao = ?, descricao = ? WHERE id = ? ");
+            
+            pstm.setString(1,pessoaComDeficiencia.getNome());
+            pstm.setDate(2, new Date(pessoaComDeficiencia.getDataNascimento().getTime()));
+            pstm.setString(3, pessoaComDeficiencia.getCpf());
+            pstm.setString(4, pessoaComDeficiencia.getGenero());
+            pstm.setString(5, pessoaComDeficiencia.getNacionalidade());
+            pstm.setString(6, pessoaComDeficiencia.getDeficiencia());
+            pstm.setString(7, pessoaComDeficiencia.getInteresse());
+            pstm.setString(8, pessoaComDeficiencia.getFormacao());
+            pstm.setString(9, pessoaComDeficiencia.getDescricao());
+            pstm.setInt(10, pessoaComDeficiencia.getId());
+
+            pstm.executeUpdate();
+
+            
+        } catch (Exception e) {
+            System.out.println("Erro ao alterar informação " + e);
+        }
+    }
     
 
    

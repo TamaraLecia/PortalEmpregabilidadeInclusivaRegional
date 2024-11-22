@@ -1,10 +1,14 @@
 package com.pei.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,13 +27,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pei.dao.AdministradorDAO;
 import com.pei.dao.PessoaComDeficienciaDAO;
+import com.pei.models.Capacitacao;
 import com.pei.models.Pessoa;
 import com.pei.models.PessoaComDeficiencia;
 import com.pei.models.Vaga;
 import com.pei.service.CandidaturaService;
 
 @RestController
+@CrossOrigin("*")//libera todas as entradas que vier da maquina
 @RequestMapping("/pessoas-com-deficiencia")
 public class PessoaComDeficienciaController {
 
@@ -153,4 +161,45 @@ public class PessoaComDeficienciaController {
 
         candidaturaService.cancelarCandidatura(status);
    }
+
+   //Endpoint para editar dados do usuário
+    @WebServlet(name = "editarUsuario", urlPatterns = {"/editarUsuario"})
+    public class alterarCapacitacao extends HttpServlet {
+        protected void alterar(HttpServletRequest requisicao, HttpServletResponse resposta) throws ServletException, IOException{
+            resposta.setContentType("text/html;charset=UTF8-8");
+            try(PrintWriter out = resposta.getWriter()){
+
+                String nome = requisicao.getParameter("txtNome");
+                String dataNascimento = requisicao.getParameter("txtDataNascimento");
+                String cpf = requisicao.getParameter("txtCpf");
+                String genero = requisicao.getParameter("txtGenero");
+                String endereco = requisicao.getParameter("txtEndereco");
+                String nacionalidade = requisicao.getParameter("txtNacionalidade");
+                String deficiencia = requisicao.getParameter("txtDeficiencia");
+                String interesse = requisicao.getParameter("txtInteresse");
+                String formacao = requisicao.getParameter("txtFormacao");
+                String descricao = requisicao.getParameter("txtFormacao");
+
+                PessoaComDeficiencia pessoaComDeficiencia = new PessoaComDeficiencia(0, dataNascimento, null, cpf, genero, endereco, nacionalidade, deficiencia, interesse, formacao, descricao);
+
+                pessoaComDeficiencia.setNome(nome);
+                pessoaComDeficiencia.setDataNascimento(new Date(pessoaComDeficiencia.getDataNascimento().getTime()));
+                pessoaComDeficiencia.setCpf(cpf);
+                pessoaComDeficiencia.setGenero(genero);
+                pessoaComDeficiencia.setEndereco(endereco);
+                pessoaComDeficiencia.setNacionalidade(nacionalidade);
+                pessoaComDeficiencia.setDeficiencia(deficiencia);
+                pessoaComDeficiencia.setInteresse(interesse);
+                pessoaComDeficiencia.setFormacao(formacao);
+                pessoaComDeficiencia.setDescricao(descricao);
+
+                PessoaComDeficienciaDAO pessoaComDeficienciaDAO = new PessoaComDeficienciaDAO(null);
+                pessoaComDeficienciaDAO.alterarPessoaComDeficiencia(pessoaComDeficiencia);
+
+
+            }
+        }
+        
+    }
+
 }
