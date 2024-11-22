@@ -27,9 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pei.dao.AdministradorDAO;
 import com.pei.dao.PessoaComDeficienciaDAO;
-import com.pei.models.Capacitacao;
 import com.pei.models.Pessoa;
 import com.pei.models.PessoaComDeficiencia;
 import com.pei.models.Vaga;
@@ -47,7 +45,7 @@ public class PessoaComDeficienciaController {
         this.pessoaComDeficienciaDAO = new PessoaComDeficienciaDAO(connection);
     }
     // Endpoint para o cadastro primario
-    @PostMapping("/CadastroPrimario")
+    @PostMapping("/cadastroPrimario")
     public String cadastroPrimario(@RequestBody Pessoa pessoa) {
         try {
             boolean cadastrado = pessoaComDeficienciaDAO.cadastroPrimario(pessoa);
@@ -60,12 +58,21 @@ public class PessoaComDeficienciaController {
 
     // Endpoint para cadastrar uma nova pessoa com deficiência
     @PostMapping("/cadastrar")
-    public String cadastrar(@RequestBody PessoaComDeficiencia pessoa) {
+    public ResponseEntity<String> cadastrar(@RequestBody PessoaComDeficiencia pessoa) {
         try {
+            if (pessoa == null) {
+                return ResponseEntity.badRequest().body("Erro: Dados da pessoa são inválidos.");
+            }
+
             boolean cadastrado = pessoaComDeficienciaDAO.cadastrar(pessoa);
-            return cadastrado ? "Cadastro realizado com sucesso!" : "Erro ao realizar cadastro.";
+            if (cadastrado) {
+                return ResponseEntity.status(HttpStatus.CREATED).body("Cadastro realizado com sucesso!");
+            } else {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao realizar cadastro.");
+            }
         } catch (SQLException e) {
-            return "Erro: " + e.getMessage();
+            System.err.println("Erro ao cadastrar: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro interno ao tentar cadastrar.");
         }
     }
 

@@ -11,6 +11,8 @@ const inputFormacao = document.getElementById("formacao");
 const inputDeficiencia = document.getElementById("deficiencia");
 const inputCpf = document.getElementById("cpf");
 const inputDescricao = document.getElementById("descricao");
+const inputNome = document.getElementById("nome");
+const inputTelefone = document.getElementById("telefone");
 
 function longar(){
     fetch("http://localhost:8080/pessoas-com-deficiencia/login",
@@ -28,9 +30,8 @@ function longar(){
         .then(function (res) {console.log(res)})
         .catch(function (res) {console.log(res)})
 }
-
-function CadastrarUsuario(){
-    fetch("http://localhost/phpmyadmin/index.php?route=/database/structure&db=pei_database/cadastrar",
+function cadastroPrimario(){
+    fetch("http://localhost/127.0.0.1/pei_database/pessoa/cadastroPrimario",
         {
             headers: {
                 "Accept": "application/json",
@@ -38,15 +39,39 @@ function CadastrarUsuario(){
             },
             method: "POST",
             body: JSON.stringify({
-                area : inputArea.value,
+                id : inputId.value,
+                nome : inputId.value,
+                telefone : inputTelefone.value,
+                email : inputEmail.value,
+                senha : inputSenha
+            })
+        })
+        .then(function (res) {console.log(res)})
+        .catch(function (res) {console.log(res)})
+}
+
+function cadastrarUsuario(){
+    fetch("http://127.0.0.1:8080/pessoa_com_deficiencia/cadastrar",
+        {
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            method: "POST",
+            body: JSON.stringify({
+                interesse : inputArea.value,
                 genero : inputGenero.value,
-                nascimento : inputNascimento.value,
+                dataNascimento : inputNascimento.value,
                 nacionalidade : inputNacionalidade.value,
                 endereco : inputEndereco.value,
                 formacao : inputFormacao.value,
                 deficiencia : inputDeficiencia.value,
                 cpf : inputCpf.value,
                 descricao : inputDescricao.value,
+                nome : inputId.value,
+                telefone : inputTelefone.value,
+                email : inputEmail.value,
+                senha : inputSenha.value
 
             })
         })
