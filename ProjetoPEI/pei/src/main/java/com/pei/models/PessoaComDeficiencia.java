@@ -12,8 +12,12 @@ public class PessoaComDeficiencia extends Pessoa{
 			String string5, String string6, String string7, String string8, String string9) {
 		//TODO Auto-generated constructor stub
 	}
+	private String genero;
 	private String deficiencia;
 	private String formacao;
 	private String experiencia;
+	private String descricao;
+	private String nacionalidade;
+	private String interesse;
  
 }
