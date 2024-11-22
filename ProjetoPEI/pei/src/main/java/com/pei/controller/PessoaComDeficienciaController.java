@@ -108,6 +108,7 @@ public class PessoaComDeficienciaController {
             } catch (Exception e) {
                 System.out.println(e);
                 System.out.println();
+                System.out.println();
             }
         }
 
