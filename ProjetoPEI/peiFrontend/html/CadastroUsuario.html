@@ -20,7 +20,7 @@
       <h2>CONCLUA SEU CADASTRO</h2>
     </div>
     <div class="form-container">
-      <form>
+      <form id = "formCadastro">
         <label for="area">Qual sua área de interesse profissional? *</label>
         <input type="text" id="area" name="area" placeholder="Digite sua área de interesse" required>
 
@@ -48,10 +48,7 @@
         <label for="descricao">Descreva sua deficiência e se precisa de alguma adaptação no trabalho. *</label>
         <textarea id="descricao" name="descricao" placeholder="Informe os detalhes" required></textarea>
 
-        <nav>
-
-          <a href="TelaInicio.html" class="botao">Cadastrar</a>
-        </nav>
+        <button type="submit" onclick="CadastrarUsuario()">Cadastrar</button>
         
       </form>
     </div>

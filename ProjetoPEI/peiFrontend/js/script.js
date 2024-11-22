@@ -1,16 +1,43 @@
-const formulario = document.querySelector("form");
-const botao = document.querySelector("button");
-const inputEmail = document.getElementById("email");
-const inputSenha = document.getElementById("password");
-const inputArea = document.getElementById("area");
-const inputGenero = document.getElementById("genero");
-const inputNascimento = document.getElementById("nascimento");
-const inputNacionalidade = document.getElementById("nacionalidade");
-const inputEndereco = document.getElementById("nacionalidade");
-const inputFormacao = document.getElementById("formacao");
-const inputDeficiencia = document.getElementById("deficiencia");
-const inputCpf = document.getElementById("cpf");
-const inputDescricao = document.getElementById("descricao");
+ const inputArea = document.getElementById('area').value;
+const inputGenero = document.getElementById('genero').value;
+const inputNascimento = document.getElementById('nascimento').value;
+const inputNacionalidade = document.getElementById('nacionalidade').value;
+const inputEndereco = document.getElementById('endereco').value;
+const inputFormacao = document.getElementById('formacao').value;
+const inputDeficiencia = document.getElementById('deficiencia').value;
+const inputCpf = document.getElementById('cpf').value;
+const inputDescricao = document.getElementById('descricao').value;
+
+const usuario = {
+    inputArea : area,
+    inputGenero : genero,
+    inputNascimento : nascimento,
+    inputNacionalidade : nacionalidade,
+    inputEndereco : endereco,
+    inputFormacao : formacao,
+    inputDeficiencia : deficiencia,
+    inputCpf : cpf,
+    inputDescricao : descricao
+
+};
+
+function cadastrar(cadastrar){
+    fetch('jdbc:mysql://localhost:3306/pei_database/pessoas-com-deficiencia/cadastrar',{
+        method : 'POST',
+        headers : {
+            'Content-Type' : 'application/json'
+        },
+        body : JSON.stringify(usuario)
+    })
+    .then(response => response.json())
+    .then(dado => {
+        console.log('Cadastro realizado com sucesso', dado)
+    })
+    .catch((erro) => {
+        console.error('Erro: ', erro);
+    });
+}
+
 
 function longar(){
     fetch("http://localhost:8080/pessoas-com-deficiencia/login",
@@ -29,6 +56,7 @@ function longar(){
         .catch(function (res) {console.log(res)})
 }
 
+/*
 function CadastrarUsuario(){
     fetch("http://localhost:8080/pessoas-com-deficiencia/cadastrar",
         {
@@ -53,7 +81,7 @@ function CadastrarUsuario(){
         .then(function (res) {console.log(res)})
         .catch(function (res) {console.log(res)})
 }
-
+*/
 function atualizarUsuario(){
 }
 
