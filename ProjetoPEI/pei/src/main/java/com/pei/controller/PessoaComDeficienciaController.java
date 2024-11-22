@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,6 +36,7 @@ import com.pei.models.Vaga;
 import com.pei.service.CandidaturaService;
 
 @RestController
+@CrossOrigin("*")//libera todas as entradas que vier da maquina
 @RequestMapping("/pessoas-com-deficiencia")
 public class PessoaComDeficienciaController {
 
@@ -107,8 +109,6 @@ public class PessoaComDeficienciaController {
                 redireciona.forward(requisicao, resposta);
             } catch (Exception e) {
                 System.out.println(e);
-                System.out.println();
-                System.out.println();
             }
         }
 
