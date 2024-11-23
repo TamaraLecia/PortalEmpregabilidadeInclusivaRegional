@@ -58,23 +58,15 @@ public class PessoaComDeficienciaController {
 
     // Endpoint para cadastrar uma nova pessoa com deficiência
     @PostMapping("/cadastrar")
-    public ResponseEntity<String> cadastrar(@RequestBody PessoaComDeficiencia pessoa) {
+    public String cadastrar(@RequestBody PessoaComDeficiencia pessoa) {
         try {
-            if (pessoa == null) {
-                return ResponseEntity.badRequest().body("Erro: Dados da pessoa são inválidos.");
-            }
-
             boolean cadastrado = pessoaComDeficienciaDAO.cadastrar(pessoa);
-            if (cadastrado) {
-                return ResponseEntity.status(HttpStatus.CREATED).body("Cadastro realizado com sucesso!");
-            } else {
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao realizar cadastro.");
-            }
+            return cadastrado ? "Cadastro realizado com sucesso!" : "Erro ao realizar cadastro.";
         } catch (SQLException e) {
-            System.err.println("Erro ao cadastrar: " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro interno ao tentar cadastrar.");
+            return "Erro: " + e.getMessage();
         }
     }
+
 
     // Endpoint para realizar login
     @PostMapping("/login")

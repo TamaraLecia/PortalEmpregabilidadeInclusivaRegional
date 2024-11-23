@@ -32,8 +32,8 @@ public class PessoaComDeficienciaDAO {
 
     // Método para cadastrar uma nova pessoa com deficiência
     public boolean cadastrar(PessoaComDeficiencia pessoa) throws SQLException {
-        String sql = "INSERT INTO pessoa_com_deficiencia (id, interesse, genero, dataNascimento, nacionalidade, endereco, formacao, deficiencia, cpf, descricao, nome, telefone, email, senha) " +
-                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO pessoa_com_deficiencia (id, interesse, genero, dataNascimento, nacionalidade, endereco, formacao, deficiencia, cpf, descricao) " +
+                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     try (PreparedStatement stmt = connection.prepareStatement(sql)) {
         stmt.setInt(1, pessoa.getId()); 
@@ -46,10 +46,6 @@ public class PessoaComDeficienciaDAO {
         stmt.setString(8, pessoa.getDeficiencia());
         stmt.setString(9, pessoa.getCpf());
         stmt.setString(10, pessoa.getDescricao());
-        stmt.setString(11, pessoa.getNome());
-        stmt.setString(12, pessoa.getTelefone());
-        stmt.setString(13, pessoa.getEmail());
-        stmt.setString(14, pessoa.getSenha());
         return stmt.executeUpdate() > 0;
         }
     }

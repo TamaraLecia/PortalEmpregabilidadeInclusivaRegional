@@ -1,12 +1,12 @@
 const formulario = document.querySelector("form");
 const botao = document.querySelector("button");
 const inputEmail = document.getElementById("email");
-const inputSenha = document.getElementById("password");
+const inputSenha = document.getElementById("senha");
 const inputArea = document.getElementById("area");
 const inputGenero = document.getElementById("genero");
-const inputNascimento = document.getElementById("nascimento");
+const inputNascimento = document.getElementById("dataNascimento");
 const inputNacionalidade = document.getElementById("nacionalidade");
-const inputEndereco = document.getElementById("nacionalidade");
+const inputEndereco = document.getElementById("endereco");
 const inputFormacao = document.getElementById("formacao");
 const inputDeficiencia = document.getElementById("deficiencia");
 const inputCpf = document.getElementById("cpf");
@@ -51,7 +51,7 @@ function cadastroPrimario(){
 }
 
 function cadastrarUsuario(){
-    fetch("http://127.0.0.1:8080/pessoa_com_deficiencia/cadastrar",
+    fetch("http://127.0.0.1:8080/pessoa-com-deficiencia/cadastrar",
         {
             headers: {
                 "Accept": "application/json",
@@ -78,7 +78,10 @@ function cadastrarUsuario(){
         .then(function (res) {console.log(res)})
         .catch(function (res) {console.log(res)})
 }
-*/
+
+const btnCadastrar = document.getElementById("btnCadastrar()");
+btnCadastrar.addEventListener("click", cadastrarUsuario());
+
 function atualizarUsuario(){
 }
 
