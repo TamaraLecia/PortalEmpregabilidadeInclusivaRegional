@@ -1,8 +1,10 @@
 const formulario = document.querySelector("form");
 const botao = document.querySelector("button");
+
+const inputNome = document.getElementById("nome");
 const inputEmail = document.getElementById("email");
 const inputSenha = document.getElementById("senha");
-const inputArea = document.getElementById("area");
+const inputInteresse = document.getElementById("interesse");
 const inputGenero = document.getElementById("genero");
 const inputNascimento = document.getElementById("dataNascimento");
 const inputNacionalidade = document.getElementById("nacionalidade");
@@ -11,9 +13,7 @@ const inputFormacao = document.getElementById("formacao");
 const inputDeficiencia = document.getElementById("deficiencia");
 const inputCpf = document.getElementById("cpf");
 const inputDescricao = document.getElementById("descricao");
-const inputNome = document.getElementById("nome");
 const inputTelefone = document.getElementById("telefone");
-
 function longar(){
     fetch("http://localhost:8080/pessoas-com-deficiencia/login",
         {
@@ -49,38 +49,53 @@ function cadastroPrimario(){
         .then(function (res) {console.log(res)})
         .catch(function (res) {console.log(res)})
 }
+formulario.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-function cadastrarUsuario(){
-    fetch("http://127.0.0.1:8080/pessoa-com-deficiencia/cadastrar",
-        {
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            },
-            method: "POST",
-            body: JSON.stringify({
-                interesse : inputArea.value,
-                genero : inputGenero.value,
-                dataNascimento : inputNascimento.value,
-                nacionalidade : inputNacionalidade.value,
-                endereco : inputEndereco.value,
-                formacao : inputFormacao.value,
-                deficiencia : inputDeficiencia.value,
-                cpf : inputCpf.value,
-                descricao : inputDescricao.value,
-                nome : inputId.value,
-                telefone : inputTelefone.value,
-                email : inputEmail.value,
-                senha : inputSenha.value
+    const interesse = document.getElementById("interesse").value;
+    const genero = document.getElementById("genero").value;
+    const dataNascimento = document.getElementById("dataNascimento").value;
+    const nacionalidade = document.getElementById("nacionalidade").value;
+    const endereco = document.getElementById("endereco").value;
+    const formacao = document.getElementById("formacao").value;
+    const deficiencia = document.getElementById("deficiencia").value;
+    const cpf = document.getElementById("cpf").value;
+    const descricao = document.getElementById("descricao").value;
 
-            })
+    fetch("http://127.0.0.1:5500/pessoa-com-deficiencia/cadastrar", {
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        method: "POST",
+        body: JSON.stringify({
+            interesse: interesse,
+            genero: genero,
+            dataNascimento: dataNascimento,
+            nacionalidade: nacionalidade,
+            endereco: endereco,
+            formacao: formacao,
+            deficiencia: deficiencia,
+            cpf: cpf,
+            descricao: descricao
         })
-        .then(function (res) {console.log(res)})
-        .catch(function (res) {console.log(res)})
-}
-
-const btnCadastrar = document.getElementById("btnCadastrar()");
-btnCadastrar.addEventListener("click", cadastrarUsuario());
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Erro ao cadastrar: " + response.statusText);
+            }
+        })
+        .then(data => {
+            alert("Cadastro realizado com sucesso!");
+            console.log(data);
+        })
+        .catch(error => {
+            alert("Erro ao cadastrar: " + error.message);
+            console.error(error);
+        });
+});
 
 function atualizarUsuario(){
 }

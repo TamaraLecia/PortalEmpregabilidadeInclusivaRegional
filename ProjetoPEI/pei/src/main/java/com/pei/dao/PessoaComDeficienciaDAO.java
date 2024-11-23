@@ -32,20 +32,19 @@ public class PessoaComDeficienciaDAO {
 
     // Método para cadastrar uma nova pessoa com deficiência
     public boolean cadastrar(PessoaComDeficiencia pessoa) throws SQLException {
-        String sql = "INSERT INTO pessoa_com_deficiencia (id, interesse, genero, dataNascimento, nacionalidade, endereco, formacao, deficiencia, cpf, descricao) " +
-                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO pessoa_com_deficiencia (interesse, genero, dataNascimento, nacionalidade, endereco, formacao, deficiencia, cpf, descricao) " +
+                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-        stmt.setInt(1, pessoa.getId()); 
-        stmt.setString(2, pessoa.getInteresse());
-        stmt.setString(3, pessoa.getGenero());
-        stmt.setDate(4, new java.sql.Date(pessoa.getDataNascimento().getTime()));
-        stmt.setString(5, pessoa.getNacionalidade());
-        stmt.setString(6, pessoa.getEndereco());
-        stmt.setString(7, pessoa.getFormacao());
-        stmt.setString(8, pessoa.getDeficiencia());
-        stmt.setString(9, pessoa.getCpf());
-        stmt.setString(10, pessoa.getDescricao());
+        stmt.setString(1, pessoa.getInteresse());
+        stmt.setString(2, pessoa.getGenero());
+        stmt.setDate(3, new java.sql.Date(pessoa.getDataNascimento().getTime()));
+        stmt.setString(4, pessoa.getNacionalidade());
+        stmt.setString(5, pessoa.getEndereco());
+        stmt.setString(6, pessoa.getFormacao());
+        stmt.setString(7, pessoa.getDeficiencia());
+        stmt.setString(8, pessoa.getCpf());
+        stmt.setString(9, pessoa.getDescricao());
         return stmt.executeUpdate() > 0;
         }
     }

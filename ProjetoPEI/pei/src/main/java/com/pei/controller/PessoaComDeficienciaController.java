@@ -31,11 +31,11 @@ import com.pei.dao.PessoaComDeficienciaDAO;
 import com.pei.models.Pessoa;
 import com.pei.models.PessoaComDeficiencia;
 import com.pei.models.Vaga;
-import com.pei.service.CandidaturaService;
+
 
 @RestController
 @CrossOrigin("*")//libera todas as entradas que vier da maquina
-@RequestMapping("/pessoas-com-deficiencia")
+@RequestMapping("/pessoa-com-deficiencia")
 public class PessoaComDeficienciaController {
 
     private final PessoaComDeficienciaDAO pessoaComDeficienciaDAO;
@@ -153,13 +153,7 @@ public class PessoaComDeficienciaController {
        System.out.println("Experiencia removida");
    }
 
-   //Endpoint para cancelar candidatura
-   @PostMapping("/cancelarCandidatura")
-   public void cancelarCandidatura(@RequestParam boolean status){
-        CandidaturaService candidaturaService = new CandidaturaService();
-
-        candidaturaService.cancelarCandidatura(status);
-   }
+   
 
    //Endpoint para editar dados do usuário
     @WebServlet(name = "editarUsuario", urlPatterns = {"/editarUsuario"})
