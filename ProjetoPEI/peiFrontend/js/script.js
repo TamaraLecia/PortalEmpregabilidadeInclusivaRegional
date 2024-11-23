@@ -62,7 +62,7 @@ formulario.addEventListener("submit", function (event) {
     const cpf = document.getElementById("cpf").value;
     const descricao = document.getElementById("descricao").value;
 
-    fetch("http://127.0.0.1:5500/pessoa-com-deficiencia/cadastrar", {
+    fetch("http://localhost:8080/pessoa-com-deficiencia/cadastrar", {
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json"
