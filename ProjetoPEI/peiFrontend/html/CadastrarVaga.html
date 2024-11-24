@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ptbr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastrar Vaga de Emprego</title>
+  <link rel="icon" type="image/png" href="acessibilidade.png">
+  <link rel="stylesheet" href="../css/CadastrarVaga.css">
+</head>
+
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">
+          <img src="acessibilidade.png" alt="Ícone de Acessibilidade" class="logo-icon">
+          <h1>Portal de Empregabilidade Inclusiva Regional</h1>
+        </div>
+        <nav class="menu">
+          <a href="TelaInicio.html">Inicio</a>
+          <a href="Sobre.html">Sobre</a>
+        </nav>
+      </header>
+
+    <div class="container">
+      <div class="sidebar">
+        <img src="acessibilidade.png" alt="Ícone de Acessibilidade" class="accessibility-icon">
+        <h2>Portal de Empregabilidade</h2>
+      </div>
+  
+      <div class="form-container">
+        <h2>Cadastrar Nova Vaga de Emprego</h2>
+        <form action="#" method="POST">
+          <label for="titulo">Título da Vaga</label>
+          <input type="text" id="titulo" name="titulo" placeholder="Informe o titulo da vaga." required>
+  
+          <label for="empresa">Empresa</label>
+          <input type="text" id="empresa" name="empresa" placeholder="Informe qual a empresa." required>
+  
+          <label for="descricao">Descrição da Vaga</label>
+          <textarea id="descricao" name="descricao" placeholder="Descreva as responsabilidades da vaga..." rows="5" required></textarea>
+  
+          <label for="local">Local da Vaga</label>
+          <input type="text" id="local" name="local" placeholder="Informe o endereço, ou se é uma vaga remota." required>
+  
+          <label for="requisitos">Requisitos</label>
+          <textarea id="requisitos" name="requisitos" placeholder="Listar requisitos da vaga..." rows="5" required></textarea>
+  
+          <label for="acessibilidade">Acessibilidade</label>
+          <textarea id="acessibilidade" name="acessibilidade" placeholder="Informar adaptações e suportes oferecidos..." rows="3" required></textarea>
+  
+          <label for="data-expiracao">Data de Expiração</label>
+          <input type="date" id="data-expiracao" name="data-expiracao" required>
+  
+          <button type="submit">Cadastrar Vaga</button>
+        </form>
+      </div>
+    </div>
+  </body>
+  </html>

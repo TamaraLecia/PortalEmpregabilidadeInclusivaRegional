@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Perfil da Empresa</title>
+  <link rel="icon" type="image/png" href="acessibilidade.png">
+  <link rel="stylesheet" href="../css/EditarPerfilEmpresa.css">
+</head>
+<body>
+  <!-- Menu Lateral -->
+  <aside>
+    <h2>Menu</h2>
+    <ul>
+      <li><a href="EditarPerfilEmpresa.html" class="active">Editar Perfil</a></li>
+      <li><a href="PerfilEmpresa.html">Meu perfil</a></li>
+      <li><a href="VagasOfertadas.html">Vagas Publicadas</a></li>
+      <li><a href="#">Sair</a></li>
+    </ul>
+  </aside>
+
+  <!-- Conteúdo Principal -->
+  <main>
+    <!-- Cabeçalho -->
+    <header class="header">
+      <div class="logo">
+        <img src="acessibilidade.png" alt="Ícone de Acessibilidade" class="logo-icon">
+        <h1>Portal de Empregabilidade Inclusiva</h1>
+      </div>
+      <nav class="menu">
+        <a href="TelaInicio.html">Início</a>
+        <a href="Sobre.html">Sobre</a>
+      </nav>
+    </header>
+
+    <hr class="divider">
+
+    <!-- Formulário de Edição -->
+    <section class="content">
+      <h2>Editar Perfil da Empresa</h2>
+      <form>
+        <div class="form-group">
+          <label for="nome">Nome da Empresa:</label>
+          <input type="text" id="nome" name="nome" value="Empresa Exemplo" disabled>
+        </div>
+
+        <div class="form-group">
+          <label for="cnpj">CNPJ:</label>
+          <input type="text" id="cnpj" name="cnpj" value="00.000.000/0001-00" disabled>
+        </div>
+
+        <div class="form-group">
+          <label for="setor">Setor de Atuação:</label>
+          <input type="text" id="setor" name="setor" value="Tecnologia da Informação" disabled>
+        </div>
+
+        <div class="form-group">
+          <label for="site">Site Oficial:</label>
+          <input type="text" id="site" name="site" value="www.empresaexemplo.com" disabled>
+        </div>
+
+        <div class="form-group">
+          <label for="endereco">Endereço:</label>
+          <input type="text" id="endereco" name="endereco" value="Rua Principal, 123 - São Paulo, SP" disabled>
+        </div>
+
+        <div class="form-group">
+          <label for="regiao">Regiões de Atuação:</label>
+          <input type="text" id="regiao" name="regiao" value="Sudeste, Sul" disabled>
+        </div>
+
+        <div class="form-group">
+          <label for="inclusao">Possui Programas de Inclusão?</label>
+          <input type="text" id="inclusao" name="inclusao" value="Sim" disabled>
+        </div>
+
+        <div class="form-group">
+          <label for="descricao-vagas">Descrição das Vagas Ofertadas:</label>
+          <textarea id="descricao-vagas" name="descricao-vagas" rows="5" disabled>
+Desenvolvedor de Software com foco em acessibilidade e suporte técnico.
+          </textarea>
+        </div>
+
+        <div class="form-buttons">
+          <button type="button" class="btn">Editar Informações</button>
+          <button type="button" class="btn-secondary">Cancelar</button>
+        </div>
+      </form>
+    </section>
+
+    <footer class="footer">
+      <p>&copy; 2024 Portal de Empregabilidade Inclusiva Regional. Todos os direitos reservados.</p>
+    </footer>
+  </main>
+</body>
+</html>
