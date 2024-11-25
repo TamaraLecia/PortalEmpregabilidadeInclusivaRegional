@@ -25,7 +25,7 @@
   }
   
   .sidebar {
-    background: #4b4dbf;
+    background: #4a4a8a;
     color: white;
     flex: 1;
     text-align: center;
@@ -76,7 +76,7 @@
   }
   
   button {
-    background: #4b4dbf;
+    background: #4a4a8a;
     color: white;
     border: none;
     font-size: 16px;

@@ -12,7 +12,7 @@
   }
   
   .header {
-    background-color: #4b4dbf;
+    background-color: #4a4a8a;
     color: white;
     padding: 20px;
     display: flex;
@@ -61,7 +61,7 @@
   }
   
   .navigation-buttons button {
-    background-color: #4b4dbf;
+    background-color:#4a4a8a;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -94,7 +94,7 @@
   }
   
   .confirmation-box h2 {
-    color: #4b4dbf;
+    color: #4a4a8a;
     margin-bottom: 20px;
   }
   
@@ -110,7 +110,7 @@
   }
   
   .confirmation-actions button {
-    background-color: #4b4dbf;
+    background-color:#4a4a8a;
     color: white;
     border: none;
     border-radius: 5px;
@@ -125,7 +125,7 @@
   }
   
   .footer {
-    background-color: #4b4dbf;
+    background-color:#4a4a8a;
     color: white;
     text-align: center;
     padding: 10px;
