@@ -12,7 +12,6 @@
   <title>Formulário de Cadastro</title>
 </head>
 <body>
-
   <div class="container">
     <div class="sidebar">
       <div class="accessibility-icon">
@@ -40,13 +39,13 @@
         <label for="formacao">Formação acadêmica *</label>
         <input type="text" id="formacao" name="formacao" placeholder="Informe sua formação acadêmica" required>
 
+        <label for="deficiencia">Portador(a) de qual deficiência? *</label>
+        <input type="text" id="deficiencia" name="deficiencia" placeholder="Descreva sua deficiência" required>
+
         <label for="cpf">CPF *</label>
         <input type="text" id="cpf" name="cpf" placeholder="Digite seu CPF" required>
 
-        <label for="deficiencia">Você possui alguma deficiência? Se sim, qual? *</label>
-        <input type="text" id="deficiencia" name="deficiencia" placeholder="Descreva sua deficiência" required>
-
-        <label for="descricao">Se a resposta anterior foi sim, descreva informações sobre sua condição e se há alguma adaptação necessária para o ambiente de trabalho?". *</label>
+        <label for="descricao">Descreva sua deficiência e se precisa de alguma adaptação no trabalho. *</label>
         <textarea id="descricao" name="descricao" placeholder="Informe os detalhes" required></textarea>
 
         <button type="submit" id="btnCadastrar">Cadastrar</button>

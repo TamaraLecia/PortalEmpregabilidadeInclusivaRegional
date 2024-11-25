@@ -1,21 +1,12 @@
 package com.pei.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.pei.models.PessoaComDeficiencia;
-import com.pei.models.Pessoa;
-import com.pei.models.Vaga;
 
 public class PessoaComDeficienciaDAO {
     private Connection connection;
 
     public PessoaComDeficienciaDAO(Connection connection) {
+    /* 
         this.connection = connection;
     }
     // Método para cadastro primario
@@ -86,7 +77,7 @@ public class PessoaComDeficienciaDAO {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     pessoa = new PessoaComDeficiencia(
-                        rs.getInt("id"),
+                        rs.getLong("id"),
                         rs.getString("nome"),
                         rs.getDate("dataNascimento"),
                         rs.getString("cpf"),
@@ -269,5 +260,6 @@ public class PessoaComDeficienciaDAO {
     }
     
 
-   
+   */
+}
 }

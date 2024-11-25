@@ -49,6 +49,8 @@ function cadastroPrimario(){
         .then(function (res) {console.log(res)})
         .catch(function (res) {console.log(res)})
 }
+
+/*
 formulario.addEventListener("submit", function (event) {
     event.preventDefault();
 
@@ -62,7 +64,7 @@ formulario.addEventListener("submit", function (event) {
     const cpf = document.getElementById("cpf").value;
     const descricao = document.getElementById("descricao").value;
 
-    fetch("http://localhost:8080/pessoa-com-deficiencia/cadastrar", {
+    fetch("http://localhost:5500/CadastroUsuario", {
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -96,6 +98,7 @@ formulario.addEventListener("submit", function (event) {
             console.error(error);
         });
 });
+*/
 
 function atualizarUsuario(){
 }
