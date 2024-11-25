@@ -1,38 +1,12 @@
 package com.pei.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.Date;
-import java.util.List;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.pei.dao.AdministradorDAO;
-import com.pei.models.Administrador;
-import com.pei.models.Capacitacao;
-import com.pei.models.PessoaComDeficiencia;
-import com.pei.models.Vaga;
 
 @RestController
 @RequestMapping("/administrador")
 public class AdministradorController {
+    /* 
     private final AdministradorDAO administradorDAO;
 
     public AdministradorController(Connection connection) {
@@ -121,5 +95,6 @@ public class AdministradorController {
         }
         
     }
+        */
 }
 

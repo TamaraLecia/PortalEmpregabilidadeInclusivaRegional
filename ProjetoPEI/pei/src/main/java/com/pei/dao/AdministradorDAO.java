@@ -14,6 +14,7 @@ import com.pei.models.PessoaComDeficiencia;
 import com.pei.models.Vaga;
 
 public class AdministradorDAO {
+    /* 
     private Connection connection;
 
     public AdministradorDAO(Connection connection) {
@@ -140,4 +141,5 @@ public class AdministradorDAO {
             System.out.println("Erro ao alterar informação " + e);
         }
     }
+        */
 }

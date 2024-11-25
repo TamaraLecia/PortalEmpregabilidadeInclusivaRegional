@@ -1,43 +1,26 @@
 package com.pei.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.SQLException;
-import java.util.List;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pei.dao.PessoaComDeficienciaDAO;
-import com.pei.models.Pessoa;
 import com.pei.models.PessoaComDeficiencia;
-import com.pei.models.Vaga;
+import com.pei.repository.PessoaComDeficienciaRepository;
+
+import jakarta.validation.Valid;
 
 
+
+
+/*@CrossOrigin("*")//libera todas as entradas que vier da maquina*/
 @RestController
-@CrossOrigin("*")//libera todas as entradas que vier da maquina
-@RequestMapping("/pessoa-com-deficiencia")
 public class PessoaComDeficienciaController {
-
+    @Autowired
+    private PessoaComDeficienciaRepository pcdr;
+/* 
     private final PessoaComDeficienciaDAO pessoaComDeficienciaDAO;
 
     @Autowired
@@ -54,36 +37,33 @@ public class PessoaComDeficienciaController {
             return "Erro: " + e.getMessage();
         }
     }
+        */
     
 
     // Endpoint para cadastrar uma nova pessoa com deficiência
-    @PostMapping("/cadastrar")
-    public String cadastrar(@RequestBody PessoaComDeficiencia pessoa) {
-        try {
-            boolean cadastrado = pessoaComDeficienciaDAO.cadastrar(pessoa);
-            return cadastrado ? "Cadastro realizado com sucesso!" : "Erro ao realizar cadastro.";
-        } catch (SQLException e) {
-            return "Erro: " + e.getMessage();
-        }
+    @GetMapping("/CadastroUsuario")
+    public String cadastro() {
+        return "cadastro";
     }
+    
+    @RequestMapping(value = "/CadastroUsuario", method=RequestMethod.POST)
+    public String cadastroUsuario(@Valid PessoaComDeficiencia pessoaComDeficiencia, BindingResult result) {
+        if(result.hasErrors()){
+            return "redirect:/cadastroUsuario";
+        }
 
+        pcdr.save(pessoaComDeficiencia);
 
+        return "redirect:/login";
+    }
+    
     // Endpoint para realizar login
-    @PostMapping("/login")
-    public Object login(@RequestParam String email, @RequestParam String senha, HttpSession session) {
-        try {
-            PessoaComDeficiencia pessoa = pessoaComDeficienciaDAO.login(email, senha);
-            if (pessoa != null) {
-                session.setAttribute("usuarioLogado", pessoa);
-                return pessoa;
-            } else {
-                return "Credenciais inválidas!";
-            }
-        } catch (SQLException e) {
-            return "Erro: " + e.getMessage();
+    @GetMapping("/login")
+        public String login(){
+            return "login";
         }
     }
-
+/* 
     // Endpoint para visualizar perfil
     @GetMapping("/{id}")
     public ResponseEntity<PessoaComDeficiencia> visualizarPerfil(@PathVariable int id) {
@@ -173,7 +153,7 @@ public class PessoaComDeficienciaController {
                 String formacao = requisicao.getParameter("txtFormacao");
                 String descricao = requisicao.getParameter("txtFormacao");
 
-                PessoaComDeficiencia pessoaComDeficiencia = new PessoaComDeficiencia(0, dataNascimento, null, cpf, genero, endereco, nacionalidade, deficiencia, interesse, formacao, descricao);
+                PessoaComDeficiencia pessoaComDeficiencia = new PessoaComDeficiencia(null, dataNascimento, null, cpf, genero, endereco, nacionalidade, deficiencia, interesse, formacao, descricao);
 
                 pessoaComDeficiencia.setNome(nome);
                 pessoaComDeficiencia.setDataNascimento(new Date(pessoaComDeficiencia.getDataNascimento().getTime()));
@@ -194,5 +174,5 @@ public class PessoaComDeficienciaController {
         }
         
     }
+*/
 
-}
