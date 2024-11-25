@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-PeiApplication<pei>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.pei.pei.PeiApplication",
+            "projectName": "pei",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

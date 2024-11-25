@@ -1,12 +1,12 @@
-package com.pei.models;
-
+package com.pei.model;
+/*
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class PessoaUserDetailsImplementacao implements UserDetails {
-
+ 
     private Pessoa pessoa;
 
     public PessoaUserDetailsImplementacao(Pessoa pessoa){
@@ -53,3 +53,4 @@ public class PessoaUserDetailsImplementacao implements UserDetails {
     }
 
 }
+*/

@@ -1,4 +1,4 @@
-package com.pei.models;
+package com.pei.model;
 
 import java.util.Date;
 

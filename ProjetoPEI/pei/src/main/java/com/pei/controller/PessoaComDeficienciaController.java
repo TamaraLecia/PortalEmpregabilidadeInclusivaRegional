@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pei.models.PessoaComDeficiencia;
-import com.pei.repository.PessoaComDeficienciaRepository;
+import com.pei.model.Pessoa;
+import com.pei.model.PessoaComDeficiencia;
+import com.pei.repository.PessoaRepository;
 
 import jakarta.validation.Valid;
 
@@ -19,40 +20,48 @@ import jakarta.validation.Valid;
 @RestController
 public class PessoaComDeficienciaController {
     @Autowired
-    private PessoaComDeficienciaRepository pcdr;
+    private PessoaRepository pessoaRepository;
+
 /* 
     private final PessoaComDeficienciaDAO pessoaComDeficienciaDAO;
 
     @Autowired
     public PessoaComDeficienciaController(Connection connection) {
         this.pessoaComDeficienciaDAO = new PessoaComDeficienciaDAO(connection);
-    }
+    }*/
+    
     // Endpoint para o cadastro primario
-    @PostMapping("/cadastroPrimario")
-    public String cadastroPrimario(@RequestBody Pessoa pessoa) {
-        try {
-            boolean cadastrado = pessoaComDeficienciaDAO.cadastroPrimario(pessoa);
-            return cadastrado ? "Cadastro realizado com sucesso!" : "Erro ao realizar cadastro.";
-        } catch (SQLException e) {
-            return "Erro: " + e.getMessage();
-        }
+    @GetMapping("/cadastroPrimario")
+    public String cadastroPrimario() {
+        return "cadastroPrimario";
     }
-        */
+    
+    @RequestMapping(value = "/cadastroPrimario", method=RequestMethod.POST)
+    public String cadastroPrimario(@Valid Pessoa pessoa, BindingResult result) {
+        if(result.hasErrors()){
+            return "redirect:/cadastroPrimario";
+        }
+
+        pessoaRepository.save(pessoa);
+
+        return "redirect:/login";
+    }
+        
     
 
     // Endpoint para cadastrar uma nova pessoa com deficiência
     @GetMapping("/CadastroUsuario")
-    public String cadastro() {
-        return "cadastro";
+    public String cadastroUsuario() {
+        return "cadastroUsuario";
     }
     
-    @RequestMapping(value = "/CadastroUsuario", method=RequestMethod.POST)
+    @RequestMapping(value = "/cadastroUsuario", method=RequestMethod.POST)
     public String cadastroUsuario(@Valid PessoaComDeficiencia pessoaComDeficiencia, BindingResult result) {
         if(result.hasErrors()){
             return "redirect:/cadastroUsuario";
         }
 
-        pcdr.save(pessoaComDeficiencia);
+        pessoaRepository.save(pessoaComDeficiencia);
 
         return "redirect:/login";
     }
@@ -60,7 +69,7 @@ public class PessoaComDeficienciaController {
     // Endpoint para realizar login
     @GetMapping("/login")
         public String login(){
-            return "login";
+            return "Login";
         }
     }
 /* 

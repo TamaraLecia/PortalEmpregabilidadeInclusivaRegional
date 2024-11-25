@@ -18,7 +18,7 @@ public class DataBaseConfiguracao {
     public DataSource dataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/pei_database?useLegacyDatetimeCode=false&serverTimezone=UTC");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/pei_database?useTimezone=true&serverTimezone=UTC");
         dataSource.setUsername("Thierre");
         dataSource.setPassword("admin");
         return dataSource;
@@ -30,7 +30,7 @@ public class DataBaseConfiguracao {
         adapter.setDatabase(Database.MYSQL);
         adapter.setShowSql(true);
         adapter.setGenerateDdl(true);
-        adapter.setDatabasePlatform("org.hibernate.dialect.MySQLDialect");
+        adapter.setDatabasePlatform("org.hibernate.dialect.MariaDBDialect");
         adapter.setPrepareConnection(true);
         return adapter;
     }

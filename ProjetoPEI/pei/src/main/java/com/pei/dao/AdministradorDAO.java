@@ -8,10 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.pei.models.Administrador;
-import com.pei.models.Capacitacao;
-import com.pei.models.PessoaComDeficiencia;
-import com.pei.models.Vaga;
+import com.pei.model.Administrador;
+import com.pei.model.Capacitacao;
+import com.pei.model.PessoaComDeficiencia;
+import com.pei.model.Vaga;
 
 public class AdministradorDAO {
     /* 
