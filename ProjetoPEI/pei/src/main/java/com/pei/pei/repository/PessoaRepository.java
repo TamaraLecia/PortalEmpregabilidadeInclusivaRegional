@@ -1,4 +1,4 @@
-package com.pei.repository;
+package com.pei.pei.repository;
 
 import org.springframework.data.repository.CrudRepository;
 

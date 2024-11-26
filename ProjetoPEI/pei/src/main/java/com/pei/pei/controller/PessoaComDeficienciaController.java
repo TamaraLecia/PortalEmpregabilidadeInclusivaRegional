@@ -1,4 +1,4 @@
-package com.pei.controller;
+package com.pei.pei.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pei.pei.model.Pessoa;
 import com.pei.pei.model.PessoaComDeficiencia;
-import com.pei.repository.PessoaRepository;
+import com.pei.pei.repository.PessoaRepository;
 
 import jakarta.validation.Valid;
 

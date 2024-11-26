@@ -1,4 +1,4 @@
-package com.pei.controller;
+package com.pei.pei.controller;
 
 import java.sql.SQLException;
 
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.pei.pei.dao.CandidaturaDAO;
-
+/* 
 @Controller
 public class CandidaturaController {
     private final CandidaturaDAO candidaturaDAO;
@@ -31,3 +31,4 @@ public class CandidaturaController {
 
     
 }
+*/
