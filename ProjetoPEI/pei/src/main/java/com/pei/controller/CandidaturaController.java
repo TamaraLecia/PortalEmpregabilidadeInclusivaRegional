@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.pei.dao.CandidaturaDAO;
+import com.pei.pei.dao.CandidaturaDAO;
 
 @Controller
 public class CandidaturaController {

@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pei.model.Pessoa;
-import com.pei.model.PessoaComDeficiencia;
+import com.pei.pei.model.Pessoa;
+import com.pei.pei.model.PessoaComDeficiencia;
 import com.pei.repository.PessoaRepository;
 
 import jakarta.validation.Valid;
