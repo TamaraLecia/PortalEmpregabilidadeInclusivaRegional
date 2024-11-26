@@ -14,7 +14,7 @@ import jakarta.validation.Valid;
 
 
 @Controller
-public class CadastroControler {
+public class CadastroController {
     @Autowired
     private PessoaRepository pessoaRepository;
     
@@ -23,14 +23,14 @@ public class CadastroControler {
         return "CriarContaUsuario";
     }
     
-    @RequestMapping(value = "/CriarContaUsuario", method=RequestMethod.POST)
+    @RequestMapping(value = "/criarContaUsuario", method=RequestMethod.POST)
     public String cadastroPrimario(@Valid Pessoa pessoa, BindingResult result) {
         if(result.hasErrors()){
-            return "redirect:/CriarContaUsuario";
+            return "redirect:/criarContaUsuario";
         }
 
         pessoaRepository.save(pessoa);
 
-        return "redirect:/Login";
+        return "redirect:/CadastroUsuario";
     }
 }

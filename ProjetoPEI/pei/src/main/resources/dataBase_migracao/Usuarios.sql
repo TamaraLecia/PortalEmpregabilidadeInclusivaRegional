@@ -1,6 +1,0 @@
-CREATE TABLE usuarios{
-    id INTEGER PRIMARY KEY UNIQUE NOT NULL,
-    logar TEXT NOT NULL UNIQUE,
-    senha TEXT NOT NULL,
-    rota Text Not NULL
-}

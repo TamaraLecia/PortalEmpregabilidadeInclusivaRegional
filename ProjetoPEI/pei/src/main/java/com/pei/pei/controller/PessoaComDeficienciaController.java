@@ -15,20 +15,20 @@ import jakarta.validation.Valid;
 
 
 
-
-/*@CrossOrigin("*")//libera todas as entradas que vier da maquina*/
+/* 
+@CrossOrigin("*")//libera todas as entradas que vier da maquina
 @RestController
 public class PessoaComDeficienciaController {
     @Autowired
     private PessoaRepository pessoaRepository;
 
-/* 
+
     private final PessoaComDeficienciaDAO pessoaComDeficienciaDAO;
 
     @Autowired
     public PessoaComDeficienciaController(Connection connection) {
         this.pessoaComDeficienciaDAO = new PessoaComDeficienciaDAO(connection);
-    }*/
+    }
     
     // Endpoint para o cadastro primario
     @GetMapping("/cadastroPrimario")
@@ -72,6 +72,7 @@ public class PessoaComDeficienciaController {
             return "Login";
         }
     }
+    
 /* 
     // Endpoint para visualizar perfil
     @GetMapping("/{id}")
