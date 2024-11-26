@@ -23,10 +23,10 @@ public class CadastroController {
         return "CriarContaUsuario";
     }
     
-    @RequestMapping(value = "/criarContaUsuario", method=RequestMethod.POST)
+    @RequestMapping(value = "/CriarContaUsuario", method=RequestMethod.POST)
     public String cadastroPrimario(@Valid Pessoa pessoa, BindingResult result) {
         if(result.hasErrors()){
-            return "redirect:/criarContaUsuario";
+            return "redirect:/CriarContaUsuario";
         }
 
         pessoaRepository.save(pessoa);
