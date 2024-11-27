@@ -30,10 +30,10 @@ public class ControllerPerfil extends HttpServlet {
         System.out.println(action);
 
         switch (action) {
-            case "/PerfilpessoaComDeficiencia":
+            case "/PerfilUsuario":
                 visualizarPerfilpessoaComDeficiencia(request, response);
                 break;
-            case "/EditarPerfilpessoaComDeficiencia":
+            case "/EditarPerfilUsuario":
                 editarPerfilpessoaComDeficiencia(request, response);
                 break;
             case "/PerfilEmpresa":
@@ -48,51 +48,57 @@ public class ControllerPerfil extends HttpServlet {
     }
 
     // Visualizar perfil de usuário
-    protected void visualizarPerfilpessoaComDeficiencia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        PessoaComDeficiencia pessoa = pessoaDAO.buscarPorId(id);
-
+    protected void visualizarPerfilPessoaComDeficiencia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id")); // Recupera o ID do usuário
+        PessoaComDeficienciaDAO dao = new PessoaComDeficienciaDAO();
+        PessoaComDeficiencia pessoa = dao.buscarPorId(id); // Busca o usuário pelo ID
+    
         if (pessoa != null) {
-            request.setAttribute("pessoa", pessoa);
-            request.getRequestDispatcher("PerfilpessoaComDeficiencia.jsp").forward(request, response);
+            request.setAttribute("pessoa", pessoa); // Define o usuário como atributo da requisição
+            request.getRequestDispatcher("PerfilUsuario.jsp").forward(request, response); // Encaminha para a JSP
         } else {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Usuário não encontrado.");
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Usuário não encontrado."); // Retorna erro 404
         }
     }
+    
 
     // Editar perfil do usuário
-	protected void editarPerfilUsario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("id"));  // Recupera o ID do usuário
-		PessoaComDeficiencia pessoaComDeficiencia = new PessoaComDeficiencia();
-
-		pessoaComDeficiencia.setId(id);
-		pessoaComDeficiencia.setAreaInteresse(request.getParameter("area-interesse"));
-		pessoaComDeficiencia.setGenero(request.getParameter("genero"));
-		pessoaComDeficiencia.setDataNascimento(Date.valueOf(request.getParameter("data-nascimento"))); // Converte a data para o formato correto
-		pessoaComDeficiencia.setNacionalidade(request.getParameter("nacionalidade"));
-		pessoaComDeficiencia.setEndereco(request.getParameter("endereco"));
-		pessoaComDeficiencia.setFormacaoAcademica(request.getParameter("formacao-academica"));
-		pessoaComDeficiencia.setDeficiencia(request.getParameter("deficiencia"));
-		pessoaComDeficiencia.setDescricaoDeficiencia(request.getParameter("descricao-deficiencia"));
-
-		pessoaComDeficienciaDAO.atualizar(pessoaComDeficiencia);
-
-		response.sendRedirect("PerfilUsuario?id=" + id);
-	}
+	protected void editarPerfilUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));  // Recupera o ID do usuário
+        PessoaComDeficiencia pessoaComDeficiencia = new PessoaComDeficiencia();
+    
+        pessoaComDeficiencia.setId(id);
+        pessoaComDeficiencia.setAreaInteresse(request.getParameter("area-interesse"));
+        pessoaComDeficiencia.setGenero(request.getParameter("genero"));
+        pessoaComDeficiencia.setDataNascimento(Date.valueOf(request.getParameter("data-nascimento"))); // Converte a data para o formato correto
+        pessoaComDeficiencia.setNacionalidade(request.getParameter("nacionalidade"));
+        pessoaComDeficiencia.setEndereco(request.getParameter("endereco"));
+        pessoaComDeficiencia.setFormacaoAcademica(request.getParameter("formacao-academica"));
+        pessoaComDeficiencia.setDeficiencia(request.getParameter("deficiencia"));
+        pessoaComDeficiencia.setDescricaoDeficiencia(request.getParameter("descricao-deficiencia"));
+    
+        PessoaComDeficienciaDAO dao = new PessoaComDeficienciaDAO();
+        dao.atualizar(pessoaComDeficiencia);
+    
+        response.sendRedirect("PerfilUsuario?id=" + id);
+    }
+    
 
 
     // Visualizar perfil da empresa
     protected void visualizarPerfilEmpresa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        Empresa empresa = empresaDAO.buscarPorId(id);
-
+        int id = Integer.parseInt(request.getParameter("id")); // Recupera o ID da empresa
+        EmpresaDAO dao = new EmpresaDAO();
+        Empresa empresa = dao.buscarPorId(id); // Busca a empresa pelo ID
+    
         if (empresa != null) {
-            request.setAttribute("empresa", empresa);
-            request.getRequestDispatcher("PerfilEmpresa.jsp").forward(request, response);
+            request.setAttribute("empresa", empresa); // Define a empresa como atributo da requisição
+            request.getRequestDispatcher("PerfilEmpresa.jsp").forward(request, response); // Encaminha para a JSP
         } else {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Empresa não encontrada.");
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Empresa não encontrada."); // Retorna erro 404
         }
     }
+    
 
     // Editar perfil da empresa
     protected void editarPerfilEmpresa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
