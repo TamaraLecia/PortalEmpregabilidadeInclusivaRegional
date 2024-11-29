@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.PessoaPCD;
@@ -154,42 +155,97 @@ public class PessoaPCDDAO {
 		}
 	}
 
-	// Método para buscar um usuário por ID
-	public PessoaPCD buscarPorId(int id) {
-		String read = "SELECT * FROM pessoaPCD WHERE id = ?";
-		PessoaPCD pessoa = null;
+	// Método para buscar um usuário pPara listar o dados do perfil do usuario
+	public ArrayList<PessoaPCD> listardados(String email1) {
+		ArrayList<PessoaPCD> lista = new ArrayList<>();
+		String read = "select * from pessoaComDeficiencia Where email = ?";
 
 		try {
-			// Abrir a conexão com o banco de dados
 			Connection con = conectar();
-			// Preparar a query SQL
 			PreparedStatement pst = con.prepareStatement(read);
-			pst.setInt(1, id);
-
-			// Executar a query e obter os resultados
+			pst.setString(1, email1);
 			ResultSet rs = pst.executeQuery();
 
-			// Verificar se o resultado existe e preencher o objeto
-			if (rs.next()) {
-				pessoa = new PessoaPCD();
-				pessoa.setId(rs.getInt("id"));
-				pessoa.setAreaInteresse(rs.getString("areaInteresse"));
-				pessoa.setGenero(rs.getString("genero"));
-				pessoa.setDataNascimento(rs.getString("dataNascimento"));
-				pessoa.setNacionalidade(rs.getString("nacionalidade"));
-				pessoa.setEndereco(rs.getString("endereco"));
-				pessoa.setFormacaoAcademica(rs.getString("formacaoAcademica"));
-				pessoa.setDeficiencia(rs.getString("deficiencia"));
-				pessoa.setDescricaoDeficiencia(rs.getString("descricaoDeficiencia"));
-			}
+			while (rs.next()) {
+				PessoaPCD pessoa = new PessoaPCD();
+				// Variavel que recebe o dado do banco
+				pessoa.setId(rs.getInt(1));
+				pessoa.setNome(rs.getString(2));
+				pessoa.setTelefone(rs.getString(3));
+				pessoa.setEmail(rs.getString(4));
+				pessoa.setSenha(rs.getString(5));
+				pessoa.setDataNascimento(rs.getString(6));
+				pessoa.setGenero(rs.getString(7));
+				pessoa.setEndereco(rs.getString(8));
+				pessoa.setNacionalidade(rs.getString(9));
+				pessoa.setCpf(rs.getString(10));
+				pessoa.setDeficiencia(rs.getString(11));
+				pessoa.setFormacaoAcademica(rs.getString(12));
+				pessoa.setDescricaoDeficiencia(rs.getString(13));
+				pessoa.setAreaInteresse(rs.getString(14));
 
-			// Fechar a conexão
+				// popular o vetor
+				lista.add(pessoa);
+			}
 			con.close();
+		//	return pessoa;
+
 		} catch (Exception e) {
 			System.out.println(e);
+			return null;
 		}
-
-		// Retornar o objeto preenchido ou null se não encontrado
-		return pessoa;
+		
+		return lista;
 	}
+	/*
+	public PessoaPCD buscarPorEmail(String email) {
+	    String read = "SELECT * FROM pessoaComDeficiencia WHERE email = ?";
+	    PessoaPCD pessoa = null;
+
+	    try (Connection con = conectar();
+	         PreparedStatement pst = con.prepareStatement(read)) {
+	        pst.setString(1, email);
+
+	        try (ResultSet rs = pst.executeQuery()) {
+	            if (rs.next()) {
+	                pessoa = new PessoaPCD();
+	                pessoa.setId(rs.getInt("id"));
+	                pessoa.setNome(rs.getString("nome"));
+	                pessoa.setEmail(rs.getString("email"));
+	                pessoa.setTelefone(rs.getString("telefone"));
+	                pessoa.setSenha(rs.getString("senha"));
+	                pessoa.setDataNascimento(rs.getString("dataNascimento"));
+	                pessoa.setGenero(rs.getString("genero"));
+	                pessoa.setEndereco(rs.getString("endereco"));
+	                pessoa.setNacionalidade(rs.getString("nacionalidade"));
+	                pessoa.setCpf(rs.getString("cpf"));
+	                pessoa.setDeficiencia(rs.getString("deficiencia"));
+	                pessoa.setFormacaoAcademica(rs.getString("formacaoAcademica"));
+	                pessoa.setDescricaoDeficiencia(rs.getString("descricaoDeficiencia"));
+	                pessoa.setAreaInteresse(rs.getString("areaInteresse"));
+
+	                // Imprime os dados da pessoa no console
+	                System.out.println("ID: " + pessoa.getId());
+	                System.out.println("Nome: " + pessoa.getNome());
+	                System.out.println("Email: " + pessoa.getEmail());
+	                System.out.println("Telefone: " + pessoa.getTelefone());
+	                System.out.println("Senha: " + pessoa.getSenha());
+	                System.out.println("Data de Nascimento: " + pessoa.getDataNascimento());
+	                System.out.println("Gênero: " + pessoa.getGenero());
+	                System.out.println("Endereço: " + pessoa.getEndereco());
+	                System.out.println("Nacionalidade: " + pessoa.getNacionalidade());
+	                System.out.println("CPF: " + pessoa.getCpf());
+	                System.out.println("Deficiência: " + pessoa.getDeficiencia());
+	                System.out.println("Formação Acadêmica: " + pessoa.getFormacaoAcademica());
+	                System.out.println("Descrição da Deficiência: " + pessoa.getDescricaoDeficiencia());
+	                System.out.println("Área de Interesse: " + pessoa.getAreaInteresse());
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return pessoa;
+	}*/
+
 }

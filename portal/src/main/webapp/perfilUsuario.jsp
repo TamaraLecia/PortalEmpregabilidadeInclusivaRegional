@@ -1,14 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="model.PessoaPCD" %>
 	
-<%
-
-	PessoaPCD pessoa = (PessoaPCD) request.getAttribute("pessoa");
-	if(pessoa == null){
-		System.out.println("Usuario nao encontrado");
-	}
-%>
+<%@ page import="java.util.ArrayList" %> 
+<%@ page import="model.PessoaPCD"%>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -45,52 +39,59 @@
 
     <section class="content">
       <h2>Meu Perfil</h2>
-      <%for(int i = 0; i < 1; i++){ %>
+    <% ArrayList<PessoaPCD> lista = (ArrayList<PessoaPCD>) request.getAttribute("pessoaComDeficiencia"); 
+    System.out.println("lista " +lista);
+    if (lista != null && !lista.isEmpty()) {
+    	for (PessoaPCD pessoa : lista) { %>
       <form>
         <div class="form-group">
           <label for="area-interesse">Área de Interesse</label>
-          <input type="text" id="area-interesse" value="${pessoa.get(i).getAreaInteresse()}"  disabled >
+          <input type="text" id="area-interesse" value="<%=pessoa.getAreaInteresse() %>"  disabled >
         </div>
 
         <div class="form-group">
           <label for="genero">Gênero</label>
-          <input type="text" id="genero" value="${pessoa.genero}"  disabled>
+          <input type="text" id="genero" value="<%=pessoa.getGenero() %>"  disabled>
         </div>
 
         <div class="form-group">
           <label for="data-nascimento">Data de Nascimento</label>
-          <input type="text" id="data-nascimento" value="${pessoa.get(i).getDataNascimento()}"  disabled>
+          <input type="text" id="data-nascimento" value="<%=pessoa.getDataNascimento() %>"  disabled>
         </div>
 
         <div class="form-group">
           <label for="nacionalidade">Nacionalidade</label>
-          <input type="text" id="nacionalidade" value="${pessoa.get(i).getNacionalidade()}"  disabled>
+          <input type="text" id="nacionalidade" value="<%=pessoa.getNacionalidade() %>"  disabled>
         </div>
 
         <div class="form-group">
           <label for="endereco">Endereço</label>
-          <input type="text" id="endereco" value="${pessoa.get(i).getEndereco()}" disabled>
+          <input type="text" id="endereco" value="<%=pessoa.getEndereco() %>" disabled>
         </div>
 
         <div class="form-group">
           <label for="formacao-academica">Formação Acadêmica</label>
-          <input type="text" id="formacao-academica" value="${pessoa.get(i).getFormacaoAcademica()}"  disabled>
+          <input type="text" id="formacao-academica" value="<%=pessoa.getFormacaoAcademica() %>"  disabled>
         </div>
 
         <div class="form-group">
           <label for="deficiencia">Deficiência</label>
-          <input type="text" id="deficiencia" value="${pessoa.deficiencia}"  disabled>
+          <input type="text" id="deficiencia" value="<%=pessoa.getDeficiencia() %>"  disabled>
         </div>
 
         <div class="form-group">
           <label for="descricao-deficiencia">Descrição sobre a Deficiência</label>
-          <textarea id="descricao-deficiencia" rows="4" disabled>${pessoa.descricaoDeficiencia}
+          <textarea id="descricao-deficiencia" rows="4" disabled><%=pessoa.getDescricaoDeficiencia() %>
           </textarea>
         </div>
       </form>
+      <%}
+    	
+    	}else{
+    		out.println("nada encontrado");
+    	}
+    %>
     </section>
-    <%} %>
-
     <footer class="footer">
       <p>&copy; 2024 Portal de Empregabilidade Inclusiva Regional. Todos os direitos reservados.</p>
     </footer>

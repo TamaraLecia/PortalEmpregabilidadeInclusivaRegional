@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,11 +9,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import DAO.PessoaPCDDAO;
 import model.PessoaPCD;
 
-@WebServlet(urlPatterns = { "/LoginPCD", "/login",})
+@WebServlet(urlPatterns = { "/LoginPCD", "/login","/verPerfil"})
 public class LoginPCD extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	PessoaPCDDAO dao = new PessoaPCDDAO();
@@ -31,6 +33,8 @@ public class LoginPCD extends HttpServlet {
 			acessarLogin(request, response);
 		} else if (action.equals("/LoginPCD")) {
 			realizarLogin(request, response);
+		} else if(action.equals("/verPerfil")) {
+			visualizarPerfilPessoaComDeficiencia(request, response);
 		}
 
 	}
@@ -55,6 +59,8 @@ public class LoginPCD extends HttpServlet {
 		boolean loginSucesso = pessoaDAO.autenticar(email, senha);
 
 		if (loginSucesso) {
+			HttpSession session = request.getSession();
+			session.setAttribute("email", email);
 			// redireciona para a tela inicial do usuário
 			response.sendRedirect("telaInicioUsuario.html");
 		} else {
@@ -88,6 +94,41 @@ public class LoginPCD extends HttpServlet {
 		dao.atualizar(pessoaComDeficiencia);
 
 		response.sendRedirect("PerfilUsuario?id=" + id);
+	}
+	
+	
+    // Visualizar perfil de usuário
+	protected void visualizarPerfilPessoaComDeficiencia(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		//String email = request.getParameter("email");
+		HttpSession session = request.getSession();
+		String email = (String) session.getAttribute("email");
+		System.out.println("valor de email: " + email);
+		//Objeto que vai receber os dados da PessoaPCD
+		ArrayList<PessoaPCD> lista = dao.listardados(email);
+		//teste de recebimento da lista
+		for(int i = 0; i < lista.size(); i++) {
+			System.out.println(lista.get(i).getId());
+			System.out.println(lista.get(i).getNome());
+			//System.out.println(lista.get(i).getEmail());
+			System.out.println(lista.get(i).getTelefone());
+			System.out.println(lista.get(i).getEmail());
+			System.out.println(lista.get(i).getSenha());
+			System.out.println(lista.get(i).getDataNascimento());
+			System.out.println(lista.get(i).getGenero());
+			System.out.println(lista.get(i).getEndereco());
+			System.out.println(lista.get(i).getNacionalidade());
+			System.out.println(lista.get(i).getCpf());
+			System.out.println(lista.get(i).getDeficiencia());
+			System.out.println(lista.get(i).getFormacaoAcademica());
+			System.out.println(lista.get(i).getDescricaoDeficiencia());
+			System.out.println(lista.get(i).getAreaInteresse());
+			System.out.println();
+			
+		}
+		request.setAttribute("pessoaComDeficiencia", lista);
+		RequestDispatcher rd = request.getRequestDispatcher("perfilUsuario.jsp");
+		rd.forward(request, response);
 	}
 
 }
