@@ -4,7 +4,6 @@
 <%@ page import="java.util.ArrayList" %> 
 <%@ page import="model.PessoaPCD"%>
 
-<% ArrayList<PessoaPCD> lista2 = (ArrayList<PessoaPCD>) request.getAttribute("pessoaComDeficiencia");%>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -19,11 +18,17 @@
   <aside>
     <h2>Menu</h2>
     <ul>
-    <%for(int i = 0; i <lista2.size(); i++ ){ %>
-      <li><a href="select?email=<%=lista2.get(i).getEmail()%>" class="active">Editar perfil</a></li>
-      <li><a href="vagasCadastradasUsuario.html">Vagas Cadastradas</a></li>
-      <li><a href="#">Sair</a></li>
-      <%} %>
+   <% ArrayList<PessoaPCD> lista2 = (ArrayList<PessoaPCD>) request.getAttribute("pessoaComDeficiencia"); 
+    System.out.println("lista " +lista2);
+    if (lista2 != null && !lista2.isEmpty()) {
+    	for (PessoaPCD pessoa : lista2) { %>
+    <li><a href="select?email=<%= pessoa.getEmail() %>" class="active">Editar perfil</a></li>
+    <li><a href="vagasCadastradasUsuario.html">Vagas Cadastradas</a></li>
+	<li><a href="logout2">Sair</a></li>
+	<%
+	} 
+	
+	}%>
     </ul>
   </aside>
 

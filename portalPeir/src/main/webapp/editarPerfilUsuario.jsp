@@ -17,7 +17,7 @@
       <li><a href="EditarPerfilUsuario.html" class="active">Editar Perfil</a></li>
       <li><a href="PerfilUsuario.html">Meu perfil</a></li>
       <li><a href="#">Vagas Cadastradas</a></li>
-      <li><a href="#">Sair</a></li>
+      <li><a href="logout2">Sair</a></li>
     </ul>
   </aside>
 

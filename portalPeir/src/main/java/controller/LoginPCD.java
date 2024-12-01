@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import DAO.PessoaPCDDAO;
 import model.PessoaPCD;
 
-@WebServlet(urlPatterns = { "/LoginPCD", "/login","/verPerfil", "/select", "/update"})
+@WebServlet(urlPatterns = { "/LoginPCD", "/login","/verPerfil", "/select", "/update", "/logout", "/sair", "/logout2"})
 public class LoginPCD extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	PessoaPCDDAO dao = new PessoaPCDDAO();
@@ -39,6 +39,12 @@ public class LoginPCD extends HttpServlet {
 			listarPerfil(request, response);
 		} else if(action.equals("/update")) {
 			editarPerfil(request, response);
+		} else if(action.equals("/logout")) {
+			realizarLogout(request, response);
+		} else if(action.equals("/sair")) {
+			sair(request, response);
+		} else if(action.equals("/logout2")) {
+			voltarParaVerPerfil(request, response);
 		}
 
 	}
@@ -66,7 +72,7 @@ public class LoginPCD extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("email", email);
 			// redireciona para a tela inicial do usuário
-			response.sendRedirect("telaInicioUsuario.html");
+			response.sendRedirect("telaInicioUsuario.jsp");
 		} else {
 			// retornar uma página de erro
 			response.setContentType("text/html");
@@ -82,7 +88,7 @@ public class LoginPCD extends HttpServlet {
 			throws ServletException, IOException {
 		//Recebimento do email do usuario que será   editado 
 		String email = request.getParameter("email");
-		System.out.println("email con: "+ email);
+		//System.out.println("email con: "+ email);
 		
 		//setar a variavel PessoaPCD
 		pessoas.setEmail(email);
@@ -91,6 +97,7 @@ public class LoginPCD extends HttpServlet {
 		dao.selecionardadosPessoa(pessoas);
 		
 		//teste de recebimento
+		/*
 		System.out.println();
 		System.out.println("Teste de recebimento PessoaPCD");
 		System.out.println(pessoas.getEmail());
@@ -103,6 +110,7 @@ public class LoginPCD extends HttpServlet {
 		System.out.println(pessoas.getDeficiencia());
 		System.out.println(pessoas.getDescricaoDeficiencia());
 		System.out.println(pessoas.getId());
+		*/
 		
 		//Setar os atributos do formulario com o conteudo PessoaPCD
 		request.setAttribute("email", pessoas.getEmail());
@@ -124,6 +132,7 @@ public class LoginPCD extends HttpServlet {
 	protected void editarPerfil(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//teste resececimento
+		/*
 		System.out.println();
 		System.out.println("teste de recebimento no formulario");
 		System.out.println(request.getParameter("email"));
@@ -136,6 +145,7 @@ public class LoginPCD extends HttpServlet {
 		System.out.println(request.getParameter("deficiencia"));
 		System.out.println(request.getParameter("descricaoDeficiencia"));
 		System.out.println(request.getParameter("id"));
+		*/
 		
 		//setar as variaveis PessoaPCD
 		pessoas.setEmail(request.getParameter("email"));
@@ -190,6 +200,43 @@ public class LoginPCD extends HttpServlet {
 		}
 		request.setAttribute("pessoaComDeficiencia", lista);
 		RequestDispatcher rd = request.getRequestDispatcher("perfilUsuario.jsp");
+		rd.forward(request, response);
+	}
+	
+	//Realizando logout
+	protected void realizarLogout(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession sessao = request.getSession();//pegar os dados do usuario que está logado na sessão
+		String email = (String) sessao.getAttribute("email");
+		ArrayList<PessoaPCD> lista2 = dao.listardados(email);
+		
+		sessao.invalidate();//metodo que realizar o logout na sessão
+		
+		RequestDispatcher rd = request.getRequestDispatcher("index.html");
+		rd.forward(request, response);
+	}
+	
+	protected void sair(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession sessao = request.getSession();//pegar os dados do usuario que está logado na sessão
+		String email = (String) sessao.getAttribute("email");
+		ArrayList<PessoaPCD> lista2 = dao.listardados(email);
+		
+		sessao.invalidate();//metodo que realizar o logout na sessão
+		
+		RequestDispatcher rd = request.getRequestDispatcher("index.html");
+		rd.forward(request, response);
+	}
+	
+	protected void voltarParaVerPerfil(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession sessao = request.getSession();//pegar os dados do usuario que está logado na sessão
+		String email = (String) sessao.getAttribute("email");
+		ArrayList<PessoaPCD> lista2 = dao.listardados(email);
+		
+		sessao.invalidate();//metodo que realizar o logout na sessão
+		
+		RequestDispatcher rd = request.getRequestDispatcher("index.html");
 		rd.forward(request, response);
 	}
 
