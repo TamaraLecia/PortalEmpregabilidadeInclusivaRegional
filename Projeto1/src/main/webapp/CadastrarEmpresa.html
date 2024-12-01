@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ptbr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro da Empresa</title>
+  <link rel="icon"
+  type="image/png"
+  href="imagens/acessibilidade.png"
+  >
+  <link rel="stylesheet" href="css/CadastrarEmpresa.css">
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <div class="icon-wrapper">
+        <img src="imagens/acessibilidade.png" alt="Acessibilidade" class="accessibility-icon">
+      </div>
+      <h2>Cadastre sua empresa</h2>
+    </div>
+    <div class="form-container">
+      <form id="formEmpresa" action="CadastrarEmpresa">
+        <label for="nome">Nome da empresa *</label>
+        <input type="text" id="nomeEmpresa" name="nomeEmpresa" placeholder="Informe o nome da empresa." required>
+
+        <label for="cnpj">CNPJ *</label>
+        <input type="text" id="cnpj" name="cnpj" placeholder="Informe o CNPJ" required>
+
+        <label for="setor">Setor de atuação da empresa *</label>
+        <input type="text" id="setor" name="setor" placeholder="Informe qual setor de atuação da sua empresa." required>
+
+        <label for="site">Site oficial da empresa </label>
+        <input type="url" id="site" name="site"  required>
+
+        <label for="endereco">Endereço completo *</label>
+        <input type="text" id="endereco" name="endereco" placeholder="Informe o endereço completo." required>
+
+        <label for="regiao">Regiões de atuação *</label>
+        <input type="text" id="regiao" name="regiao" required>
+
+        <label for="programaInclusao">Possui programas de inclusão para PCDs? *</label>
+        <input type="text" id="programaInclusao" name="programaInclusao" required>
+
+        <label for="tipoVaga">Tipo da vaga ofertada *</label>
+        <input type="text" id="tipoVaga" name="tipoVaga" placeholder="Informe o tipo de vaga ofertada." required>
+
+        <label for="descricaoVagas">Descreva quais as vagas ofertadas e suas funções *</label>
+        <textarea id="descricaoVagas" name="descricaoVagas" rows="5" placeholder="Faça uma descrição sobre a vaga ofertada." required></textarea>
+
+        <input type="button" value="Cadastrar" class="btn" onclick="validarinformacao()">
+      </form>
+    </div>
+  </div>
+  <script src="scripts/empresa.js"></script>
+</body>
+</html>
