@@ -32,7 +32,7 @@ public class AdmDao {
 	
 	//Criar administrador
 	public void criarAdm(Administrador adm) {
-		String create = "insert into administrador (acessoAdm,nome,telefone,email,senha) values(?,?,?,?,?)";
+		String create = "insert into administrador (nivelAcesso,nome,telefone,email,senha) values(?,?,?,?,?)";
 		try {
 			//abrir a conexao com o banco
 			Connection con = conectar();
@@ -64,8 +64,8 @@ public class AdmDao {
 	
 	//pegar o id
 	
-	public boolean autenticar(String email, String senha, int nivelAcesso) {
-		String administrador = "select email,senha,acessoAdm from Administrador where email = ? and senha = ? and acessoAdm = ?";
+	public boolean autenticar(String email, String senha) {
+		String administrador = "select * from Administrador where email = ? and senha = ?";
 		
 		try {
 			//abrir a conexao com o banco
@@ -73,16 +73,57 @@ public class AdmDao {
 			PreparedStatement pst = con.prepareStatement(administrador);
 			pst.setString(1, email);
 			pst.setString(2, senha);
-			pst.setInt(3, nivelAcesso);
 			ResultSet rs = pst.executeQuery();
 			
-			con.close();
 			return rs.next();
 			
 		} catch (Exception e) {
 			System.out.println(e);
 			return false;
 		}
+	}
+	
+	public int pegarNivelAcesso(String email, String senha) {
+		String nivelAcesso = "select nivelAcesso from Administrador where email = ? and senha = ?";
+		
+		try {
+			//abrir a conexao com o banco
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(nivelAcesso);
+			pst.setString(1, email);
+			pst.setString(2, senha);
+			ResultSet rs = pst.executeQuery();
+			
+			if(rs.next()) {
+				return rs.getInt("nivelAcesso");
+			}else {
+				return 0;
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return 0;
+	}
+	
+	public int pegarId(String email) {
+		String id = "select id from Administrador where email = ?";
+		
+		try {
+			//abrir a conexao com o banco
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(id);
+			pst.setString(1, email);
+			
+			ResultSet rs = pst.executeQuery();
+			
+			if(rs.next()) {
+				return rs.getInt("id");
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return 0;
 	}
 	
 	//teste de conexao

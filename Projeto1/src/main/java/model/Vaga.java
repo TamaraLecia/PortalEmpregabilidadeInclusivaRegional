@@ -6,12 +6,12 @@ public class Vaga {
     private String titulo;
     private String descricao;
     private String requisito;
-    private double salario;
+    private String salario;
     private String localizacao;
     private String acessibilidade;
     private String dataExpiracao;
     
-	public Vaga(int id, Empresa empresa, String titulo,String descricao, String requisitos, double salario, String localizacao,String acessibilidade, String dataExpiracao) {
+	public Vaga(int id, Empresa empresa, String titulo,String descricao, String requisitos, String salario, String localizacao,String acessibilidade, String dataExpiracao) {
 		this.id = id;
 		this.empresa = empresa;
 		this.titulo = titulo;
@@ -51,10 +51,10 @@ public class Vaga {
 	public void setRequisito(String requisito) {
 		this.requisito = requisito;
 	}
-	public double getSalario() {
+	public String getSalario() {
 		return salario;
 	}
-	public void setSalario(double salario) {
+	public void setSalario(String salario) {
 		this.salario = salario;
 	}
 	public String getLocalizacao() {

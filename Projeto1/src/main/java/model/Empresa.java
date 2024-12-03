@@ -29,6 +29,17 @@ public class Empresa {
 		this.adm = adm;
 	}
 	
+	public Empresa(String nomeEmpresa, String cnpj, String setor, String site,String endereco, String regiaoAtuacao, String programaInclusao,String descricaoVaga) {
+		this.nomeEmpresa = nomeEmpresa;
+		this.cnpj = cnpj;
+		this.setor = setor;
+		this.site = site;
+		this.endereco = endereco;
+		this.regiaoAtuacao = regiaoAtuacao;
+		this.programaInclusao = programaInclusao;
+		this.descricaoVaga = descricaoVaga;
+	}
+	
 	public Empresa() {
 		
 	}

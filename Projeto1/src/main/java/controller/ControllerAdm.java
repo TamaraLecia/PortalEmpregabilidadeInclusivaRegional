@@ -13,7 +13,7 @@ import model.Administrador;
 /**
  * Servlet implementation class ControllerAdm
  */
-@WebServlet(urlPatterns = {"/ControllerAdm", "/main", "/insert"})
+@WebServlet(urlPatterns = {"/ControllerAdm","/inserir","/pessoaJ"})
 public class ControllerAdm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -36,11 +36,18 @@ public class ControllerAdm extends HttpServlet {
 		
 		System.out.println(action);
 		
-		if(action.equals("/insert")) {
+		if(action.equals("/inserir")) {
 			novoAdm(request, response);
-		} else {
+		}else if(action.equals("/pessoaJ")) {
+			pessoasJ(request, response);
+		}else {
 			response.sendRedirect("TelaInicio.html");
 		}
+	}
+	
+	// entrando no formulario da pessoa Juridica
+	protected void pessoasJ(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+		response.sendRedirect("CriarContaAdministrador.jsp");
 	}
 	
 	//inserir Administrador
@@ -67,12 +74,12 @@ public class ControllerAdm extends HttpServlet {
 		
 		//Guarda o valor do id na sessão que foi criada
 		request.getSession().setAttribute("idAdm", adm.getId());
+		request.getSession().setAttribute("nivelAcesso", adm.getNivelAcesso());
 		request.getSession().setAttribute("email", adm.getEmail());
 		request.getSession().setAttribute("senha", adm.getSenha());
-		request.getSession().setAttribute("nivelAcesso", adm.getNivelAcesso());
 		
 		//redirecionar para o documento tela de inicio da empresa
-		response.sendRedirect("TelaInicioEmpresa.html");
+		response.sendRedirect("TelaInicioEmpresa.jsp");
 		
 	}
 

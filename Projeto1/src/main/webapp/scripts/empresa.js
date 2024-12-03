@@ -4,7 +4,8 @@
 
 function validarinformacao() {
 	
-    var nomeEmpresa = document.getElementById('nomeEmpresa').value;
+    var idAdm = document.getElementById('idAdm').value
+	var nomeEmpresa = document.getElementById('nomeEmpresa').value;
     var cnpj = document.getElementById('cnpj').value;
     var setor = document.getElementById('setor').value;
 	var site = document.getElementById('site').value;
@@ -49,4 +50,19 @@ function validarinformacao() {
     } else {
         document.getElementById('formEmpresa').submit();
     }
+}
+
+function salvar(){
+	let id = document.getElementById('id').value
+	let nome = document.getElementById('nomeEmpresa').value
+	let cnpj = document.getElementById('cnpj').value
+	let setor = document.getElementById('setor').value
+	let site = document.getElementById('site').value
+	let endereco = document.getElementById('endereco').value
+	let regiao = document.getElementById('regioes').value
+	let inclusao = document.getElementById('inclusao').value
+	let descricao = document.getElementById('descricao').value
+	
+	document.getElementById('formAtualizar').submit();
+	
 }
