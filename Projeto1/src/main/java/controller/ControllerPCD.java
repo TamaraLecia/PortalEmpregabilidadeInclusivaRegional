@@ -39,7 +39,7 @@ public class ControllerPCD extends HttpServlet {
 		} else if (action.equals("/insert")) {
 			novoUsuario(request, response);
 			cadastroFeito(request, response);
-		}
+		} 
 	}
 
 	// teste de conexao

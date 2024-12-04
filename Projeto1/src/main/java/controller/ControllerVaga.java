@@ -48,8 +48,10 @@ public class ControllerVaga extends HttpServlet {
 		
 		if(action.equals("/enviarNomeEmpresa")){
 			pegarNomeEmpresa(request, response);
-		}else if(action.equals("/CadastrarVaga")) {
+		} else if(action.equals("/CadastrarVaga")) {
 			cadastrarVaga(request,response);
+		} else if (action.equals("/visualizarVagas")) {
+			visualizarVagas(request, response);
 		}
 	}
 	
