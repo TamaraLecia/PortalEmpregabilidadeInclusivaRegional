@@ -13,6 +13,17 @@
   <link rel="stylesheet" href="css/telaInicioUsuario.css">
 </head>
 <body>
+<div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+  
   <aside>
     <h2>Menu</h2>
     <ul>
@@ -26,7 +37,7 @@
       <li class="dropdown">
         <a href="#opcao3">Perfil</a>
         <ul class="dropdown-content">
-          <li><a href="verPerfil">Perfil de usuário</a></li>
+          <li><a href="PerfilUsuario">Perfil de usuário</a></li>
         </ul>
       </li>
       <li class="dropdown">
@@ -57,8 +68,8 @@
     </section>
 
     <section class="navigation-buttons">
-      <a href="Vagas.jsp">
-        <button>Vagas disponÃ­veis</button>
+      <a href="mostrarVaga">
+        <button>Vagas disponiveis</button>
       </a>
       </a>
     </section>
@@ -68,12 +79,12 @@
       <ol>
         <li>Guanambi - BA</li>
         <li>Barreiras - BA</li>
-        <li>CaetitÃ© - BA</li>
+        <li>Caetite - BA</li>
         <li>Bom Jesus da Lapa - BA</li>
-        <li>VitÃ³ria da Conquista - BA</li>
+        <li>Vitoria da Conquista - BA</li>
       </ol>
 
-      <h2>EndereÃ§os relacionados:</h2>
+      <h2>Endereçoss relacionados:</h2>
 
     <div class="address">
       <h3>PEIR Guanambi - BA:</h3>
@@ -125,15 +136,5 @@
       <p>Email: portalempregabilidade@gmail.com</p>
     </footer>
   </main>
-  <div vw class="enabled">
-    <div vw-access-button class="active"></div>
-    <div vw-plugin-wrapper>
-      <div class="vw-plugin-top-wrapper"></div>
-    </div>
-  </div>
-  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-  <script>
-    new window.VLibras.Widget('https://vlibras.gov.br/app');
-  </script>
 </body>
 </html>

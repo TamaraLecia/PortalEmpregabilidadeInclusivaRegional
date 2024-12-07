@@ -4,9 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import model.Vaga;
 
@@ -31,7 +29,8 @@ public class VagaDao {
 			return null;
 		}
 	}
-
+	
+	//CRUD CREATE
 	public void cadastrarVaga(Vaga vaga) {
 	    String create = "INSERT INTO Vaga (titulo, descricao, requisitos, salario, localizacao, acessibilidade, dataExpiracao, empresaNome) " +
 	                    "VALUES (?, ?, ?, ?, ?, ?, ?, (SELECT nomeEmpresa FROM empresa WHERE nomeEmpresa = ?))";
@@ -55,88 +54,74 @@ public class VagaDao {
 	        e.printStackTrace();
 	    }
 	}
-
-	public List<Vaga> listarVagas() {
-    List<Vaga> vagas = new ArrayList<>();
-    String query = "SELECT * FROM Vaga";
-    
-    try (Connection con = conectar();
-         PreparedStatement pst = con.prepareStatement(query);
-         ResultSet rs = pst.executeQuery()) {
-        
-        while (rs.next()) {
-            Vaga vaga = new Vaga();
-            vaga.setTitulo(rs.getString("titulo"));
-            vaga.setDescricao(rs.getString("descricao"));
-            vaga.setRequisitos(rs.getString("requisitos"));
-            vaga.setLocalizacao(rs.getString("localizacao"));
-            vaga.setAcessibilidade(rs.getString("acessibilidade"));
-            vaga.setEmpresaNome(rs.getString("empresaNome"));
-            vagas.add(vaga);
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-    return vagas;
-}
-
- public List<Vaga> visualizarVagas() {
-        List<Vaga> vagas = new ArrayList<>();
-        String query = "SELECT idVaga, titulo, requisitos, salario, localizacao, acessibilidade, empresa, beneficios FROM Vaga";
-
-        try (Connection conexao = conectar();
-             PreparedStatement stmt = conexao.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
-                Vaga vaga = new Vaga();
-                vaga.setIdVaga(rs.getInt("idVaga"));
-                vaga.setTitulo(rs.getString("titulo"));
-                vaga.setRequisitos(rs.getString("requisitos"));
-                vaga.setSalario(rs.getDouble("salario"));
-                vaga.setLocalizacao(rs.getString("localizacao"));
-                vaga.setAcessibilidade(rs.getString("acessibilidade"));
-                vaga.setEmpresa(rs.getString("empresa"));
-                vaga.setBeneficios(rs.getString("beneficios"));
-                vagas.add(vaga);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return vagas;
-    }
-
-
-    public List<Vaga> visualizarVagasPorEmpresa(int idEmpresa) {
-        List<Vaga> vagas = new ArrayList<>();
-        String query = "SELECT idVaga, titulo, requisitos, salario, localizacao, acessibilidade, empresa, beneficios " +
-                       "FROM Vaga " +
-                       "WHERE idEmpresa = ?";
-
-        try (Connection conexao = conectar();
-             PreparedStatement stmt = conexao.prepareStatement(query)) {
-
-            stmt.setInt(1, idEmpresa); // Substitui o placeholder pelo ID da empresa
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    Vaga vaga = new Vaga();
-                    vaga.setIdVaga(rs.getInt("idVaga"));
-                    vaga.setTitulo(rs.getString("titulo"));
-                    vaga.setRequisitos(rs.getString("requisitos"));
-                    vaga.setSalario(rs.getDouble("salario"));
-                    vaga.setLocalizacao(rs.getString("localizacao"));
-                    vaga.setAcessibilidade(rs.getString("acessibilidade"));
-                    vaga.setEmpresa(rs.getString("empresa"));
-                    vaga.setBeneficios(rs.getString("beneficios"));
-                    vagas.add(vaga);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return vagas;
-    }
-}
+	
+	
+	//Lista todas as vagas que o administrador está ofertando na sua empresa
+	/*public ArrayList<Vaga> listaVagasAdm(String nome){
+		ArrayList<Vaga> listaVaga = new ArrayList<>();
+		
+		String ler = "Select * from vaga where empresaNome = ?";
+		
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(ler);
+			pst.setString(1, nome);
+			
+			ResultSet rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				Vaga vaga = new Vaga();
+				vaga.setId(rs.getInt(1));
+				vaga.setTitulo(rs.getString(3));
+				vaga.setDescricao(rs.getString(4));
+				vaga.setRequisito(rs.getString(5));
+				vaga.setSalario(rs.getString(6));
+				vaga.setLocalizacao(rs.getString(7));
+				vaga.setAcessibilidade(rs.getString(8));
+				vaga.setDataExpiracao(rs.getString(9));
+				
+				//popular o vetor
+				listaVaga.add(vaga);
+			}
+			con.close();
+			return listaVaga;
+		} catch (Exception e) {
+			return null;
+		}
+	}*/
+	
+	//lista todas as vagas
+	public ArrayList<Vaga> listaVagas(){
+		ArrayList<Vaga> listaVaga = new ArrayList<>();
+		
+		String ler = "Select * from vaga";
+		
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(ler);
+			
+			ResultSet rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				Vaga vaga = new Vaga();
+				vaga.setId(rs.getInt(1));
+				vaga.setTitulo(rs.getString(3));
+				vaga.setDescricao(rs.getString(4));
+				vaga.setRequisito(rs.getString(5));
+				vaga.setSalario(rs.getString(6));
+				vaga.setLocalizacao(rs.getString(7));
+				vaga.setAcessibilidade(rs.getString(8));
+				vaga.setDataExpiracao(rs.getString(9));
+				
+				//popular o vetor
+				listaVaga.add(vaga);
+			}
+			con.close();
+			return listaVaga;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	
 }

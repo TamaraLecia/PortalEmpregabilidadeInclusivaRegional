@@ -62,8 +62,7 @@ public class AdmDao {
 		}
 	}
 	
-	//pegar o id
-	
+	//autenticação
 	public boolean autenticar(String email, String senha) {
 		String administrador = "select * from Administrador where email = ? and senha = ?";
 		
@@ -106,6 +105,7 @@ public class AdmDao {
 		return 0;
 	}
 	
+	//pega o id do administrador
 	public int pegarId(String email) {
 		String id = "select id from Administrador where email = ?";
 		
@@ -124,16 +124,5 @@ public class AdmDao {
 			System.out.println(e);
 		}
 		return 0;
-	}
-	
-	//teste de conexao
-	
-	public void testeConexao() {
-		try {
-			Connection con = conectar();
-			System.out.println(con);
-		} catch (Exception e) {
-			System.out.println(e);
-		}
 	}
 }

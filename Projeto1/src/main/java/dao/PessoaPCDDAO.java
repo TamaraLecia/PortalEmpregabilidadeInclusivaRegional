@@ -45,7 +45,7 @@ public class PessoaPCDDAO {
 
 	/* CRUD CREATE */
 	public void inserirpessoa(PessoaPCD pessoa) {
-		String create = "insert into pessoaComDeficiencia (nome, telefone, email, senha, dataNascimento, genero, endereco, nacionalidade, cpf, deficiencia, formacaoAcademica,areaInteresse, descricaoDeficiencia, nivelAcesso) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String create = "insert into pessoaComDeficiencia (nome, telefone, email, senha, dataNascimento, genero, endereco, nacionalidade, cpf, deficiencia, formacaoAcademica,descricaoDeficiencia, areaInteresse, nivelAcesso) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		try {
 			// abrir a conexao
 			Connection con = conectar();
@@ -76,6 +76,8 @@ public class PessoaPCDDAO {
 		}
 	}
 	
+	//SELECT
+	//pega o nivel de acesso
 	public int pegarNivelAcesso(String email, String senha) {
 		String nivelAcesso = "select nivelAcesso from pessoaComDeficiencia where email = ? and senha = ?";
 		
@@ -99,7 +101,7 @@ public class PessoaPCDDAO {
 		return 0;
 	}
 
-	// CRUD READ/
+	// CRUD READ/******
 	public ArrayList<PessoaPCD> listarPessoa() {
 		// Criando um objeto para listar os dados da pessoa
 		ArrayList<PessoaPCD> pessoa = new ArrayList<>();
@@ -127,7 +129,8 @@ public class PessoaPCDDAO {
 			return null;
 		}
 	}
-
+	
+	//SELECT
 	// Buscar pessoa para realizar o login, o email que é passado pela sessão vem daqui
 	public boolean autenticar(String email, String senha) {
 		PessoaPCD pessoa = new PessoaPCD();
@@ -149,7 +152,7 @@ public class PessoaPCDDAO {
 		}
 	}
 	
-
+	//SELECT******
 	// Buscar pessoa para realizar o login, o email que é passado pela sessão vem daqui
 	public void selecionarPessoa(PessoaPCD pessoa) {
 		String read2 = "select * from pessoaComDeficiencia where email = ?";
@@ -173,7 +176,9 @@ public class PessoaPCDDAO {
 			System.out.println(e);
 		}
 	}
-		// Método para buscar um usuário pPara listar o dados do perfil do usuario
+	
+	//CRUD READ
+	// Método para buscar um usuário pPara listar o dados do perfil do usuario
 	public ArrayList<PessoaPCD> listardados(String email1) {
 		ArrayList<PessoaPCD> lista = new ArrayList<>();
 		String read = "select * from pessoaComDeficiencia Where email = ?";
@@ -215,6 +220,8 @@ public class PessoaPCDDAO {
 		
 		return lista;
 	}
+	
+	
 	/*CRUD UPDATE*/
 	//selecionar pessoa
 	public void selecionardadosPessoa(PessoaPCD pessoa) {
@@ -267,6 +274,64 @@ public class PessoaPCDDAO {
 		}
 		
 	}
-
+	
+	//CRUD READ ver perfil usuario 04/
+	// Método para buscar um usuário pPara listar o dados do perfil do usuario
+	public ArrayList<PessoaPCD> mostrarDados(int id) {
+		//Objeto para acessar a classe PessoaPCD
+		ArrayList<PessoaPCD> mostrarPerfil = new ArrayList<>();
+		String read = "select areaInteresse, genero, dataNascimento, nacionalidade, endereco, formacaoAcademica, deficiencia, descricaoDeficiencia from pessoaComDeficiencia where id = ?";
+		try {
+			
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(read);
+			pst.setInt(1, id);
+			ResultSet rs = pst.executeQuery();
+			//o laço abaixo será executado enquanto houver os dados
+			while(rs.next()) {
+				//variavel que recebe do banco de dados
+				PessoaPCD pessoa = new PessoaPCD();
+				
+				pessoa.setAreaInteresse(rs.getString("areaInteresse"));
+				pessoa.setGenero(rs.getString("genero"));
+				pessoa.setDataNascimento(rs.getString("dataNascimento"));
+				pessoa.setNacionalidade(rs.getString("nacionalidade"));
+				pessoa.setEndereco(rs.getString("endereco"));
+				pessoa.setFormacaoAcademica(rs.getString("formacaoAcademica"));
+				pessoa.setDeficiencia(rs.getString("deficiencia"));
+				pessoa.setDescricaoDeficiencia(rs.getString("descricaoDeficiencia"));
+				
+				//populando o arrayList
+				mostrarPerfil.add(pessoa);
+			}
+			con.close();
+			return mostrarPerfil;
+		} catch (Exception e) {
+			System.out.println("erro: " + e);
+			return null;
+		}
+	}
+	
+	//SELECT
+	//pegar o id do usuario
+		public int pegarId(String email) {
+			String id = "select id from pessoaComDeficiencia where email = ?";
+			
+			try {
+				//abrir a conexao com o banco
+				Connection con = conectar();
+				PreparedStatement pst = con.prepareStatement(id);
+				pst.setString(1, email);
+				
+				ResultSet rs = pst.executeQuery();
+				
+				if(rs.next()) {
+					return rs.getInt("id");
+				}
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			return 0;
+		}
 
 }

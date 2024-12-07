@@ -10,6 +10,16 @@
 <link rel="stylesheet" href="css/Login.css">
 </head>
 <body>
+<div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
 	<header class="header">
 		<div class="logo">
 			<img src="imagens/acessibilidade.png" alt="Ícone de Acessibilidade"
@@ -17,7 +27,7 @@
 			<h1>Portal de Empregabilidade Inclusiva Regional</h1>
 		</div>
 		<nav class="menu">
-			<a href="TelaInicio.jsp">Inicio</a> <a href="Sobre.html">Sobre</a>
+			<a href="TelaInicial">Inicio</a> <a href="Sobre.html">Sobre</a>
 		</nav>
 	</header>
 
@@ -47,23 +57,12 @@
 
 				<nav>
 					<input type="submit" class="botao" value="Login">
-					<!-- <a href="TelaInicio.html" class="botao">Login</a> -->
+					<!-- <a href="TelaInicio.jsp" class="botao">Login</a> -->
 				</nav>
 
 			</form>
 		</div>
 	</div>
 	<script src="../js/script.js"></script>
-	<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-	<div vw class="enabled">
-		<div vw-access-button class="active"></div>
-		<div vw-plugin-wrapper>
-		  <div class="vw-plugin-top-wrapper"></div>
-		</div>
-	  </div>
-	  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-	  <script>
-		new window.VLibras.Widget('https://vlibras.gov.br/app');
-	  </script>
 </body>
 </html>

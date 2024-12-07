@@ -31,7 +31,7 @@ public class EmpresaDao {
 		}
 	}
 	
-	
+	//CRUD CREATE
 	//Criar empresa;
 	public void criarEmpresa(Empresa empresa) {
 		String create = "insert into empresa (administrador_id,nomeEmpresa,cnpj,setor,site,endereco,regiaoAtuacao,programaInclusao,tipoVaga,descricaoVaga) values(?,?,?,?,?,?,?,?,?,?)";
@@ -63,7 +63,8 @@ public class EmpresaDao {
 		}
 	}
 	
-	//verificar se empresa existe
+	//SELECT
+	//verificar se empresa existe atrvés do nome que é informado
 	public boolean verificarEmpresa(String nome) {
 		String verificar = "select nomeEmpresa from empresa where nomeEmpresa = ?";
 		
@@ -82,7 +83,9 @@ public class EmpresaDao {
 		}
 	}
 	
-	//Listar todas as empresas dependendo do id informado
+	
+	//SELECT
+	//Listar todas as empresas dependendo do id do admistrador  informado
 	public ArrayList<Empresa> listarDados(int id){
 		ArrayList<Empresa> listaEmpresa = new ArrayList<>();
 		
@@ -112,6 +115,7 @@ public class EmpresaDao {
 		}	
 	}
 	
+	//CRUD READ
 	//Listar todas as empresas dependendo do id da empresa
 	public ArrayList<Empresa> mostrarDados(int id){
 			ArrayList<Empresa> mostrarEmpresa = new ArrayList<>();
@@ -151,7 +155,8 @@ public class EmpresaDao {
 			
 		}
 	
-	//editar perfil pessoa
+	//CRUD UPDATE
+	//editar perfil empresa
 	public void alterarPerfil(Empresa empresa) {
 		String create = "UPDATE empresa SET nomeEmpresa=?, cnpj=?, setor=?, site=?, endereco=?, regiaoAtuacao=?, programaInclusao=?, descricaoVaga=? WHERE id=?";
 		try { 
@@ -175,6 +180,7 @@ public class EmpresaDao {
 		
 	}
 	
+	//CRUD SELECT
 	//listar tudo de empresa independente do id
 	public ArrayList<Empresa> listarTodasEmpresa() {
 		ArrayList<Empresa> lista = new ArrayList<>();
@@ -211,6 +217,32 @@ public class EmpresaDao {
 		
 	}
 	
+	//SELECT********
+	//Seleciona o nome da empresa que será digitado pelo o administrador 
+	//Se esse nome for igual ao do banco retorna o nome da empesa e cadastra a vaga;
+	public String selecionaEmpresaNome(String empresaNome) {
+		String nome = null;
+		
+		String select = "select nomeEmpresa from empresa where nomeEmpresa = ?";
+		
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(select);
+			
+			pst.setString(1, empresaNome);
+			ResultSet rs = pst.executeQuery();
+			
+			if(rs.next()) {
+				nome = rs.getString("nomeEmpresa");
+				return nome;
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return nome;
+	}
+	
+	//****
 	public String selecionarEmpresa(int id_empresa) {
 		String nomeEmpresa = null;
 		
@@ -233,6 +265,7 @@ public class EmpresaDao {
 		return nomeEmpresa;
 	}
 	
+	//****
 	public Empresa pegarEmpresa(int id) {
 		String idEmpresa = "select nomeEmpresa from empresa where id=?";
 		

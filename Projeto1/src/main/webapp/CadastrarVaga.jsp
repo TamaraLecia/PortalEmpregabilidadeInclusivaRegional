@@ -1,14 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="model.Empresa" %>
-
-<%
-
-	ArrayList<Empresa> lista = (ArrayList<Empresa>) request.getAttribute("listaEmpresa");
-
-%>
 
 <!DOCTYPE html>
 <html lang="ptbr">
@@ -22,7 +13,16 @@
 
 </head>
 <body>
-
+<div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
     <header class="header">
         <div class="logo">
           <img src="imagens/acessibilidade.png" alt="Ícone de Acessibilidade" class="logo-icon">
@@ -42,23 +42,18 @@
   
       <div class="form-container">
         <h2>Cadastrar Nova Vaga de Emprego</h2>
+        <!-- Verificar se há uma mensagem de erro --> 
+        <% if (request.getAttribute("mensagemErro") != null) { %> 
+        <script> 
+        alert("<%= request.getAttribute("mensagemErro") %>"); 
+        </script> <% } %>
         <form id="formVaga" action="CadastrarVaga">
           <label for="titulo">Título da Vaga</label>
           <input type="text" id="titulo" name="titulo" placeholder="Informe o titulo da vaga." required>
   
-          <label for="idEmpresa">Empresa</label>
-          <select id ="idEmpresa" name ="idEmpresa" required>
-          <%
-          System.out.println("lista vaga: " + lista);
-          if(lista != null){ %>
-          		<%for(Empresa empresa : lista){ %>
-          		 <option value="<%= empresa.getNome()%>"><%= empresa.getId() %></option>
-          		<%} %>
-         <% }%><%else{ %>
-         			<textArea type="text" value="Não há empresas cadastradas"></textArea>
-         	<%} %>
-          
-          </select>
+          <label for="nomeEmpresa">Empresa</label>
+          <input type="text" id="nomeEmpresa" name="nomeEmpresa" placeholder="Informe a empresa que está ofertando a vaga." required>
+  
   
           <label for="descricao">Descrição da Vaga</label>
           <textarea id="descricao" name="descricao" placeholder="Descreva as responsabilidades da vaga..." rows="5" required></textarea>
@@ -82,16 +77,6 @@
         </form>
       </div>
     </div>
-    <div vw class="enabled">
-      <div vw-access-button class="active"></div>
-      <div vw-plugin-wrapper>
-        <div class="vw-plugin-top-wrapper"></div>
-      </div>
-    </div>
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>
-      new window.VLibras.Widget('https://vlibras.gov.br/app');
-    </script>
     <script src="scripts/vaga.js"></script>
   </body>
   </html>

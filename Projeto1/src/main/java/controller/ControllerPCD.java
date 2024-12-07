@@ -2,12 +2,15 @@ package controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.PessoaPCDDAO;
 import model.Pessoa;
@@ -16,10 +19,10 @@ import model.PessoaPCD;
 /**
  * Servlet implementation class Controller
  */
-@WebServlet(urlPatterns = { "/ControllerPCD", "/main", "/concluido", "/insert", "/pessoaF", "/principal" })
+@WebServlet(urlPatterns = { "/ControllerPCD", "/main", "/concluido", "/insert", "/pessoaF", "/principal", "/PerfilUsuario" })
 public class ControllerPCD extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	PessoaPCDDAO dao = new PessoaPCDDAO();
+	PessoaPCDDAO pessoaPCDDao = new PessoaPCDDAO();
 	PessoaPCD pessoa = new PessoaPCD();
 
 	public ControllerPCD() {
@@ -39,11 +42,10 @@ public class ControllerPCD extends HttpServlet {
 		} else if (action.equals("/insert")) {
 			novoUsuario(request, response);
 			cadastroFeito(request, response);
-		} 
+		} else if(action.equals("/PerfilUsuario")) {
+			listarUsuario(request,response);
+		}
 	}
-
-	// teste de conexao
-	// dao.testeConexao();
 
 	// Escolher perfil
 	protected void pessoas(HttpServletRequest request, HttpServletResponse response)
@@ -83,27 +85,7 @@ public class ControllerPCD extends HttpServlet {
 		System.out.println(request.getParameter("deficiencia"));
 		System.out.println(request.getParameter("descricao"));
 		//System.out.println(request.getParameter("nivelAcesso"));
-		// Recebendo os dados para o banco
-		/*
-		String nome = request.getParameter("nome");
-		String telefone = request.getParameter("telefone");
-		String email = request.getParameter("email");
-		String senha = request.getParameter("senha");
-		String interesse = request.getParameter("interesse");
-		String genero = request.getParameter("genero");
-		String dataNascimento = request.getParameter("dataNascimento");
-		String nacionalidade = request.getParameter("nacionalidade");
-		String endereco = request.getParameter("endereco");
-		String formacao = request.getParameter("formacao");
-		String cpf = request.getParameter("cpf");
-		String deficiencia = request.getParameter("deficiencia");
-		String descricao = request.getParameter("descricao");
 		
-
-		// Criar um novo objeto Administrador com os valores recebidos
-		PessoaPCD pessoa = new PessoaPCD(0, nome, telefone, email, senha, dataNascimento, genero, endereco,
-				nacionalidade, cpf, deficiencia, formacao, descricao, interesse, 2);
-		*/
 		pessoa.setNome(request.getParameter("nome"));
 		pessoa.setTelefone(request.getParameter("telefone"));
 		pessoa.setEmail(request.getParameter("email"));
@@ -119,13 +101,31 @@ public class ControllerPCD extends HttpServlet {
 		pessoa.setDescricaoDeficiencia(request.getParameter("descricao"));
 		pessoa.setNivelAcesso(2);
 		
-		// Redirecionar
-		//response.sendRedirect("cadastroUsuario.html");
-		
-		// Invocar o método inserir administrador passando o objeto adm
-		dao.inserirpessoa(pessoa);
+		// Invocar o método inserir PessoaPCD passando o objeto pessoa
+		pessoaPCDDao.inserirpessoa(pessoa);
 		request.getSession().setAttribute("nivelAcesso", pessoa.getNivelAcesso());
 	}
+	
+	//ver perfil 04
+		protected void listarUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			HttpSession session = request.getSession();
+			Integer idUsuario = (Integer) session.getAttribute("idUsuario");
+			
+			ArrayList<PessoaPCD> lista = pessoaPCDDao.mostrarDados(idUsuario);
+			for(int i=0; i < lista.size(); i++) {
+				System.out.println(lista.get(i).getAreaInteresse());
+				System.out.println(lista.get(i).getGenero());
+				System.out.println(lista.get(i).getDataNascimento());
+				System.out.println(lista.get(i).getNacionalidade());
+				System.out.println(lista.get(i).getEndereco());
+				System.out.println(lista.get(i).getFormacaoAcademica());
+				System.out.println(lista.get(i).getDeficiencia());
+				System.out.println(lista.get(i).getDescricaoDeficiencia());
+			}
+			request.setAttribute("mostrarPerfil", lista);
+			RequestDispatcher rd = request.getRequestDispatcher("PerfilUsuario.jsp");
+			rd.forward(request, response);
+		}
 
 
 }

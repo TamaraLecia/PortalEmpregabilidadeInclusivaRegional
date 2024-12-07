@@ -42,7 +42,7 @@ public class ControllerEmpresa extends HttpServlet {
 		String action = request.getServletPath();
 		
 		System.out.println(action);
-		
+	
 		if(action.equals("/CadastrarEmpresa")) {
 			novaEmpresa(request, response);
 		}else if(action.equals("/verNomeEmpresa")) {
@@ -57,6 +57,8 @@ public class ControllerEmpresa extends HttpServlet {
 			listarEmpresa(request, response);
 		}else if(action.equals("/mandarNomeEmpresaVaga")) {
 			nomeEmpresa(request, response);
+		}else{
+			listarEmpresa(request, response);
 		}
 	}
 	
@@ -103,7 +105,7 @@ public class ControllerEmpresa extends HttpServlet {
 		
 		empresaDao.criarEmpresa(empresa);
 		
-		//Guarda o valor do id na sessão que foi criada
+		//Guarda o nome da empresa na sessão que foi criada
 		request.getSession().setAttribute("empresaNome", empresa.getNomeEmpresa());
 		
 		response.sendRedirect("TelaInicioEmpresa.jsp");	
@@ -242,7 +244,7 @@ public class ControllerEmpresa extends HttpServlet {
 		empresa.setProgramaInclusao(request.getParameter("inclusao"));
 		empresa.setDescricaoVaga(request.getParameter("descricao"));
 		
-		//executar o método alterar contato
+		//executar o método alterar a empresa
 		empresaDao.alterarPerfil(empresa);
 		
 		ArrayList<Empresa> listaEmpresa = empresaDao.mostrarDados(idEmp);

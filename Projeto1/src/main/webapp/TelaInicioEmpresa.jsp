@@ -2,9 +2,7 @@
     pageEncoding="UTF-8"%>
  <%@ page import="model.Empresa"%>
 <%@ page import="java.util.ArrayList"%>
-<%
-	ArrayList<Empresa> lista = (ArrayList<Empresa>) request.getAttribute("lista");
-%>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -15,6 +13,16 @@
   <link rel="stylesheet" href="css/TelaInicioEmpresa.css">
 </head>
 <body>
+<div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
   <aside>
     <h2>Menu</h2>
     <ul>
@@ -68,44 +76,68 @@
       	</a>
     </section>
 
-    <div class="content">
-      <p>O portal de empregabilidade digital. Confira quais são as cidades que possui alguma empresa cadastrada:</p>
-      <%if(lista != null) {%>
+     <div class="content">
+      <p>O portal de empregabilidade digital conta com 5 cidades no momento. Confira quais são:</p>
       <ol>
-      <%for(Empresa empresa : lista){ %>
-        <li><%=empresa.getEndereco()%></li>
-        <%}%>
+        <li>Guanambi - BA</li>
+        <li>Barreiras - BA</li>
+        <li>Caetité - BA</li>
+        <li>Bom Jesus da Lapa - BA</li>
+        <li>Vitória da Conquista - BA</li>
       </ol>
 
       <h2>Endereços relacionados:</h2>
 
     <div class="address">
-    <%for(Empresa empresa: lista) {%>
-      <h3><%=empresa.getNomeEmpresa() %></h3>
-      <p><%=empresa.getEndereco() %></p>
+      <h3>PEIR Guanambi - BA:</h3>
+      <p>Avenida Santos Dumont, 1239, bairro Centro</p>
       <p><strong>Contatos:</strong></p>
-      <p><%=empresa.getSite() %></p>
-     <br>
-     <%}%>
+      <p>Telefone: (77) 99190-9878</p>
+      <p>Email: peir_guanambi@gmail.com</p>
+      <p>Expediente: Segunda-feira a sexta-feira das 8h às 18h</p>
     </div>
-	<%}%><%else{ %>
-		<input type="text" value="Não há nenhuma empresa Cadastrada">
-	<%} %>
+
+    <div class="address">
+      <h3>PEIR Barreiras - BA:</h3>
+      <p>Rua Maria da Glória, 135, bairro Antônio Geraldo</p>
+      <p><strong>Contatos:</strong></p>
+      <p>Telefone: (77) 99967-5567</p>
+      <p>Email: peir_barreiras@gmail.com</p>
+      <p>Expediente: Segunda-feira a sexta-feira das 8h às 18h</p>
+    </div>
+
+    <div class="address">
+      <h3>PEIR Vitoria da Conquista - BA:</h3>
+      <p>Travessa Henrique Prates, 135, bairro Candeiras</p>
+      <p><strong>Contatos:</strong></p>
+      <p>Telefone: (77) 99927-4584</p>
+      <p>Email: peir_VConquista@gmail.com</p>
+      <p>Expediente: Segunda-feira a sexta-feira das 8h às 18h</p>
+    </div>
+
+    <div class="address">
+      <h3>PEIR Bom Jesus da Lapa - BA:</h3>
+      <p>Rua do Machado, 159, bairro Centro</p>
+      <p><strong>Contatos:</strong></p>
+      <p>Telefone: (77) 99962-8565</p>
+      <p>Email: peir_bjl@gmail.com</p>
+      <p>Expediente: Segunda-feira a sexta-feira das 8h às 18h</p>
+    </div>
+
+    <div class="address">
+      <h3>PEIR Caetité - BA:</h3>
+      <p>Rua Novo Horizonte, 1005, bairro Centro </p>
+      <p><strong>Contatos:</strong></p>
+      <p>Telefone: (77) 99967-5567</p>
+      <p>Email: peir_barreiras@gmail.com</p>
+      <p>Expediente: Segunda-feira a sexta-feira das 8h às 18h</p>
+    </div>
 
     <footer class="footer">
       <p>Contato: 3451-9078</p>
       <p>Email: portalempregabilidade@gmail.com</p>
     </footer>
   </main>
-  <div vw class="enabled">
-    <div vw-access-button class="active"></div>
-    <div vw-plugin-wrapper>
-      <div class="vw-plugin-top-wrapper"></div>
-    </div>
-  </div>
-  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-  <script>
-    new window.VLibras.Widget('https://vlibras.gov.br/app');
-  </script>
 </body>
 </html>
+

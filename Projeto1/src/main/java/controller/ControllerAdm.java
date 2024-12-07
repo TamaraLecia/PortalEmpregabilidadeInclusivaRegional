@@ -41,7 +41,7 @@ public class ControllerAdm extends HttpServlet {
 		}else if(action.equals("/pessoaJ")) {
 			pessoasJ(request, response);
 		}else {
-			response.sendRedirect("TelaInicio.html");
+			response.sendRedirect("TelaInicio.jsp");
 		}
 	}
 	
@@ -72,7 +72,7 @@ public class ControllerAdm extends HttpServlet {
 		//Chamar O metodo criarAdm
 		admDao.criarAdm(adm);
 		
-		//Guarda o valor do id na sessão que foi criada
+		//Guarda o valor do id, nível de acesso, email, e senha na sessão que foi criada
 		request.getSession().setAttribute("idAdm", adm.getId());
 		request.getSession().setAttribute("nivelAcesso", adm.getNivelAcesso());
 		request.getSession().setAttribute("email", adm.getEmail());

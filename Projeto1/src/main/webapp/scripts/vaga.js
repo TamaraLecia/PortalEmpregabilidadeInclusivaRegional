@@ -5,7 +5,7 @@
 function validarinformacao() {
 	
     var titulo = document.getElementById('titulo').value;
-    var empresa = document.getElementById('empresa').value;
+    var nomeEmpresa = document.getElementById('nomeEmpresa').value;
     var descricao = document.getElementById('descricao').value;
 	var local = document.getElementById('local').value;
     var requisito = document.getElementById('requisito').value;
@@ -44,4 +44,9 @@ function validarinformacao() {
     } else {
         document.getElementById('formVaga').submit();
     }
+}
+
+function salvar() {
+	var nomeEmpresa = document.getElementById('nomeEmpresa').value;
+	document.getElementById('form').submit();
 }
